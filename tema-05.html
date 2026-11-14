@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T5 Series de Laurent, singularidades y transformada Z · Matemáticas III · Guía para aprobar</title>
+<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 5, Series de Laurent, singularidades y transformada Z">
+<meta name="theme-color" content="#1b6e8c">
+<link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="style.css">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="hub-bar" style="max-width:1180px;margin:0 auto;padding:10px 16px 0"><a href="https://helionacon-ui.github.io/GIEIA-UPCT/" style="display:inline-flex;align-items:center;gap:6px;font:600 13.5px/1 system-ui,sans-serif;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none">← Todas las guías GIEyA</a><p class="fecha" style="margin:6px 0 0;max-width:none;font:13px/1.45 system-ui,sans-serif;color:var(--muted)">Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p></div>
+<div class="crumb"><a href="index.html">Matemáticas III</a><span class="sep">›</span><span>Variable compleja (control 2 · 50 %)</span><span class="sep">›</span><span>T5 · Series de Laurent, singularidades y transformada Z</span></div><a href="#top" class="totop" id="totop" aria-label="Volver arriba">↑</a>
+<div class="wrap" id="top">
+<nav aria-label="Índice" class="toc"><a href="index.html" style="--tc:var(--c0)">Portada</a><div class="grp">Empezar</div><a href="index.html#cero" style="--tc:var(--c0)">Empieza aquí desde cero</a><a href="plan.html" style="--tc:var(--c0)">Cómo es la evaluación</a><a href="index.html#progreso" style="--tc:var(--c0)">Tu progreso</a><div class="grp">Variable compleja (control 2 · 50 %)</div><a href="tema-01.html" style="--tc:var(--c2)">T1 Números complejos: operaciones y forma polar</a><a href="tema-02.html" style="--tc:var(--c3)">T2 Funciones de variable compleja y holomorfía</a><a href="tema-03.html" style="--tc:var(--c4)">T3 Integración compleja: Cauchy y residuos</a><a href="tema-05.html" style="--tc:var(--c6)" class="on" aria-current="page">T5 Series de Laurent, singularidades y transformada Z</a><div class="grp">Transformadas (control 1 · 30 %)</div><a href="tema-04.html" style="--tc:var(--c5)">T4 Transformadas de Laplace y de Fourier</a><a href="tema-06.html" style="--tc:var(--c7)">T6 Ecuaciones en derivadas parciales y diferencias finitas</a><div class="grp">Practicar</div><a href="cuestiones.html" style="--tc:var(--c8)">Cuestiones de teoría respondidas</a><a href="examenes.html" style="--tc:var(--c8)">Problemas tipo resueltos</a><a href="problemas.html" style="--tc:var(--c8)">Los boletines oficiales</a><a href="laboratorio.html" style="--tc:var(--c7)">Prácticas de laboratorio</a><a href="formulario.html" style="--tc:var(--c8)">Formulario</a></nav>
+<main>
+<section class="sec tema" style="--tc:var(--c6);--tcs:var(--c6s)">
+<div class="sh"><span aria-hidden="true" class="badge">5</span><div class="shx"><p class="kick">Variable compleja (control 2 · 50 %) · Tema 5</p><h2 id="t5">Series de Laurent, singularidades y transformada Z</h2><div class="tags"><span class="tag">Variable compleja (control 2 · 50 %)</span><span class="tag">Control 2 · variable compleja</span></div></div></div>
+<div class="zero"><p class="ft">Desde cero</p><p><b>Objetivo:</b> Desarrollar funciones en serie de Taylor y de Laurent, clasificar singularidades, calcular residuos a partir del desarrollo y aplicar la transformada Z a ecuaciones en diferencias.</p><p><b>Series de potencias</b> \(\sum a_n(z-z_0)^n\): convergen en un <b>disco</b> \(|z-z_0|<R\) con \(R=\lim|a_n/a_{n+1}|\) (radio de convergencia), y la suma es holomorfa dentro.</p>
+<p><b>Teorema de Taylor</b>: si f es holomorfa en \(|z-z_0|<R\), \(f(z)=\sum_{n\ge0}\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n\). El radio llega hasta la singularidad más cercana.</p>
+<p><b>Serie de Laurent</b>: en una <b>corona</b> \(A(z_0;r,R)=\{r<|z-z_0|<R\}\),</p>
+<p>\(f(z)=\displaystyle\sum_{n=-\infty}^{+\infty}a_n(z-z_0)^n\), con \(a_n=\frac{1}{2\pi i}\oint\frac{f(z)}{(z-z_0)^{n+1}}dz\).</p>
+<p>La <b>parte regular</b> son los términos con \(n\ge0\) y la <b>parte singular (o principal)</b> los de \(n<0\). <b>El residuo es \(a_{-1}\)</b>. En la práctica no se integra: se usa una serie conocida (\(e^w\), \(\operatorname{sen}w\), \(\frac{1}{1-w}\)) con \(w=\frac1{z-z_0}\) o similar.</p>
+<p><b>Clasificación de singularidades aisladas</b> por la parte principal:</p>
+<ul><li><b>Evitable</b>: no hay parte principal. El límite existe y es finito (\(\frac{\operatorname{sen}z}{z}\) en 0).</li>
+<li><b>Polo de orden m</b>: la parte principal tiene un número finito de términos, hasta \((z-z_0)^{-m}\). Entonces \(|f|\to\infty\).</li>
+<li><b>Esencial</b>: infinitos términos negativos (\(e^{1/z}\), \(\operatorname{sen}\frac1z\)). Por el <b>teorema de Casorati-Weierstrass</b>, cerca de ella f toma valores arbitrariamente próximos a cualquier complejo.</li></ul>
+<p><b>Transformada Z</b>: para una sucesión \(\{y_n\}_{n\ge0}\),</p>
+<p>\(\mathcal Z[y_n](z)=Y(z)=\displaystyle\sum_{n=0}^{\infty}y_nz^{-n}\), que es exactamente una serie de Laurent en \(1/z\), convergente fuera de un disco (<b>región de convergencia</b>).</p>
+<p><b>Propiedades clave</b>: \(\mathcal Z[y_{n+1}]=z(Y(z)-y_0)\) y \(\mathcal Z[y_{n+2}]=z^2Y(z)-z^2y_0-zy_1\): desplazar la sucesión es multiplicar por z. Por eso una <b>ecuación en diferencias</b> se convierte en una ecuación algebraica, igual que Laplace con las EDO. La <b>inversa</b> se obtiene por desarrollo de Laurent, fracciones simples o residuos: \(y_n=\sum\operatorname{Res}\left[z^{n-1}Y(z)\right]\).</p>
+<p>Transformadas básicas: \(\mathcal Z[1]=\frac{z}{z-1}\), \(\mathcal Z[a^n]=\frac{z}{z-a}\), \(\mathcal Z[n]=\frac{z}{(z-1)^2}\).</p></div>
+<details class="nom"><summary><span aria-hidden="true" class="nom-ic">Aa</span>Nomenclatura del tema 5 <span class="src">7 símbolos</span></summary><div class="inner">
+<div class="tw"><table><tr><th>Símbolo</th><th>Qué significa</th><th>Unidades · ejemplo</th></tr><tr><td class="sym">Taylor</td><td>aₙ = f⁽ⁿ⁾(z₀)/n!</td><td class="u"></td></tr><tr><td class="sym">Laurent</td><td>Σ aₙ(z − z₀)ⁿ, n ∈ Z</td><td class="u">en una corona</td></tr><tr><td class="sym">parte principal</td><td>Términos con n < 0</td><td class="u"></td></tr><tr><td class="sym">evitable / polo / esencial</td><td>0 / finitos / infinitos términos</td><td class="u"></td></tr><tr><td class="sym">Z[yₙ]</td><td>Σ yₙ z^(−n)</td><td class="u"></td></tr><tr><td class="sym">Z[y_{n+1}]</td><td>z(Y − y₀)</td><td class="u"></td></tr><tr><td class="sym">Z[aⁿ]</td><td>z/(z − a)</td><td class="u"></td></tr></table></div></div></details>
+<figure class="fig"><p class="ft">Figura interactiva - serie de Laurent y tipo de singularidad</p><div data-sim="laurent"></div><figcaption>Mueve los controles y lee el recuadro: la figura calcula lo mismo que tú harías a mano en el examen.</figcaption></figure>
+<h3 id="t5-formulas">Lo que tienes que saber</h3>
+<div class="box key"><ul>
+<li>Taylor: \(a_n=\frac{f^{(n)}(z_0)}{n!}\) · Laurent: \(a_n=\frac{1}{2\pi i}\oint\frac{f}{(z-z_0)^{n+1}}dz\), \(\operatorname{Res}=a_{-1}\).</li>
+<li>Series útiles: \(e^w=\sum\frac{w^n}{n!}\), \(\operatorname{sen}w=\sum\frac{(-1)^nw^{2n+1}}{(2n+1)!}\), \(\frac1{1-w}=\sum w^n\) (|w| &lt; 1).</li>
+<li>Singularidad: sin parte principal (evitable) · finita hasta \(-m\) (polo de orden m) · infinita (esencial).</li>
+<li>\(\mathcal Z[y_n]=\sum y_nz^{-n}\); \(\mathcal Z[y_{n+1}]=z(Y-y_0)\); \(\mathcal Z[y_{n+2}]=z^2Y-z^2y_0-zy_1\).</li>
+<li>\(\mathcal Z[a^n]=\frac{z}{z-a}\) · \(y_n=\sum\operatorname{Res}[z^{n-1}Y(z)]\).</li></ul></div>
+<h3 id="t5-metodo">Cómo se resuelve</h3>
+<ol class="steps"><li>Para el desarrollo de Laurent, <b>no integres</b>: manipula una serie conocida hasta la forma pedida y di en qué corona vale.</li><li>Separa parte regular y parte singular, y lee el residuo en el coeficiente de \((z-z_0)^{-1}\).</li><li>Clasifica la singularidad contando los términos negativos.</li><li>En ecuaciones en diferencias: aplica Z a ambos lados con las fórmulas de desplazamiento, despeja Y(z), descompón en fracciones simples con <b>Y(z)/z</b> y antitransforma con la tabla.</li></ol>
+<div class="box trap"><h4>Trampas típicas</h4><ul><li>Dar un desarrollo de Laurent sin indicar la corona de convergencia (una misma función tiene desarrollos distintos en coronas distintas).</li><li>Confundir el orden del polo con el número de términos del desarrollo.</li><li>Olvidar que en \(\mathcal Z[y_{n+2}]\) aparecen \(y_0\) e \(y_1\).</li><li>Descomponer Y(z) en vez de Y(z)/z: la tabla tiene una z en el numerador.</li></ul></div>
+<h3 id="t5-problema">Problema tipo</h3>
+<div class="prob"><div class="enun"><p class="et">Enunciado</p><p><b>(Problemas 2 del control 2 y 2 del control 1, 2021)</b> a) Desarrollar \(f(z)=z^{12}\operatorname{sen}\frac1z\) en serie de Laurent alrededor de \(z_0=0\) en \(0<|z|\), indicar parte regular y singular, clasificar la singularidad y dar el residuo. b) Resolver con la transformada Z: \(y_{n+2}=2y_{n+1}+2y_n\), \(y_0=0\), \(y_1=1\).</p></div>
+<details class="paso"><summary><span class="pn">✓</span>Ver solución paso a paso</summary><div class="inner"><p>a) Partiendo de \(\operatorname{sen}w=\sum_{k\ge0}\frac{(-1)^kw^{2k+1}}{(2k+1)!}\) con \(w=\frac1z\):</p>
+<p>\(f(z)=z^{12}\sum_{k\ge0}\frac{(-1)^k}{(2k+1)!}z^{-(2k+1)}=\sum_{k\ge0}\frac{(-1)^k}{(2k+1)!}z^{11-2k}\), válido en \(0<|z|<\infty\).</p>
+<p><b>Parte regular</b> (exponentes ≥ 0): \(k=0,\dots,5\) ⇒ \(z^{11}-\frac{z^9}{3!}+\frac{z^7}{5!}-\frac{z^5}{7!}+\frac{z^3}{9!}-\frac{z}{11!}\).</p>
+<p><b>Parte singular</b>: \(k\ge6\) ⇒ \(\frac{z^{-1}}{13!}-\frac{z^{-3}}{15!}+\cdots\): tiene <b>infinitos términos negativos</b> ⇒ la singularidad en 0 es <b>esencial</b>.</p>
+<p><b>Residuo</b> = coeficiente de \(z^{-1}\) ⇒ \(k=6\): \(\operatorname{Res}(f,0)=\dfrac{(-1)^6}{13!}=\mathbf{\dfrac{1}{13!}}=1{,}6059\times10^{-10}\).</p>
+<p>b) Aplicando Z con \(y_0=0\), \(y_1=1\):</p>
+<p>\(z^2Y-z^2y_0-zy_1=2(zY-zy_0)+2Y\) ⇒ \(z^2Y-z=2zY+2Y\) ⇒ \(Y(z)=\dfrac{z}{z^2-2z-2}\).</p>
+<p>Raíces: \(z=1\pm\sqrt3\). Llamando \(\beta=1+\sqrt3\) (el <b>número de platino</b>) y \(2-\beta=1-\sqrt3\):</p>
+<p>\(\dfrac{Y}{z}=\dfrac{1}{(z-\beta)(z-(2-\beta))}=\dfrac{1}{2\sqrt3}\left(\dfrac{1}{z-\beta}-\dfrac{1}{z-(2-\beta)}\right)\)</p>
+<p>⇒ \(Y(z)=\dfrac{1}{2\sqrt3}\left(\dfrac{z}{z-\beta}-\dfrac{z}{z-(2-\beta)}\right)\) ⇒ <b>\(y_n=\dfrac{1}{2\sqrt3}\left(\beta^n-(2-\beta)^n\right)\)</b>.</p>
+<p>Comprobación: \(y_0=0\) ✓; \(y_1=\frac{(1+\sqrt3)-(1-\sqrt3)}{2\sqrt3}=1\) ✓; \(y_2=\frac{(1+\sqrt3)^2-(1-\sqrt3)^2}{2\sqrt3}=\frac{4\sqrt3}{2\sqrt3}=2\) ✓ (que es \(2y_1+2y_0=2\)).</p></div></details></div>
+<h3 id="t5-auto">Autoevaluación</h3>
+<p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>¿Cómo se distingue un polo de una singularidad esencial?</summary><div class="inner"><p>Por el número de términos de la parte principal del desarrollo de Laurent: finito (hasta \(-m\)) ⇒ polo de orden m; infinito ⇒ esencial. En un polo \(|f|\to\infty\); en una esencial no hay límite.</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Por qué una función puede tener varios desarrollos de Laurent?</summary><div class="inner"><p>Porque el desarrollo depende de la CORONA: \(\frac{1}{z(z-1)}\) tiene un desarrollo en \(0<|z|<1\) y otro distinto en \(|z|>1\). Siempre hay que indicar la región.</p></div></details><details class="paso"><summary><span class="pn">3</span>Clasifica la singularidad de \(\frac{\operatorname{sen}z}{z}\) en z = 0.</summary><div class="inner"><p>Evitable: \(\frac{\operatorname{sen}z}{z}=1-\frac{z^2}{3!}+\cdots\) no tiene parte principal; definiendo f(0) = 1 la función resulta entera.</p></div></details><details class="paso"><summary><span class="pn">4</span>¿Qué papel juega la transformada Z frente a la de Laplace?</summary><div class="inner"><p>El mismo, pero en tiempo discreto: convierte ecuaciones en diferencias (sucesiones) en ecuaciones algebraicas, igual que Laplace con las ecuaciones diferenciales. Es la base del control digital.</p></div></details><details class="paso"><summary><span class="pn">5</span>¿Por qué se descompone \(Y(z)/z\) y no \(Y(z)\)?</summary><div class="inner"><p>Porque las transformadas de la tabla llevan una z en el numerador (\(\mathcal Z[a^n]=\frac{z}{z-a}\)): descomponiendo \(Y/z\) y multiplicando después por z, cada sumando es directamente antitransformable.</p></div></details>
+</section>
+<nav class="pager" aria-label="Páginas"><a href="tema-04.html"><small>← Anterior</small>T4 · Transformadas de Laplace y de Fourier</a><a class="nx" href="tema-06.html"><small>Siguiente →</small>T6 · Ecuaciones en derivadas parciales y diferencias finitas</a></nav>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+</main>
+</div>
+<script src="app.js"></script>
+<script src="sims.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T4 Transformadas de Laplace y de Fourier · Matemáticas III · Guía para aprobar</title>
+<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 4, Transformadas de Laplace y de Fourier">
+<meta name="theme-color" content="#1b6e8c">
+<link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="style.css">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="hub-bar" style="max-width:1180px;margin:0 auto;padding:10px 16px 0"><a href="https://helionacon-ui.github.io/GIEIA-UPCT/" style="display:inline-flex;align-items:center;gap:6px;font:600 13.5px/1 system-ui,sans-serif;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none">← Todas las guías GIEyA</a><p class="fecha" style="margin:6px 0 0;max-width:none;font:13px/1.45 system-ui,sans-serif;color:var(--muted)">Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p></div>
+<div class="crumb"><a href="index.html">Matemáticas III</a><span class="sep">›</span><span>Transformadas (control 1 · 30 %)</span><span class="sep">›</span><span>T4 · Transformadas de Laplace y de Fourier</span></div><a href="#top" class="totop" id="totop" aria-label="Volver arriba">↑</a>
+<div class="wrap" id="top">
+<nav aria-label="Índice" class="toc"><a href="index.html" style="--tc:var(--c0)">Portada</a><div class="grp">Empezar</div><a href="index.html#cero" style="--tc:var(--c0)">Empieza aquí desde cero</a><a href="plan.html" style="--tc:var(--c0)">Cómo es la evaluación</a><a href="index.html#progreso" style="--tc:var(--c0)">Tu progreso</a><div class="grp">Variable compleja (control 2 · 50 %)</div><a href="tema-01.html" style="--tc:var(--c2)">T1 Números complejos: operaciones y forma polar</a><a href="tema-02.html" style="--tc:var(--c3)">T2 Funciones de variable compleja y holomorfía</a><a href="tema-03.html" style="--tc:var(--c4)">T3 Integración compleja: Cauchy y residuos</a><a href="tema-05.html" style="--tc:var(--c6)">T5 Series de Laurent, singularidades y transformada Z</a><div class="grp">Transformadas (control 1 · 30 %)</div><a href="tema-04.html" style="--tc:var(--c5)" class="on" aria-current="page">T4 Transformadas de Laplace y de Fourier</a><a href="tema-06.html" style="--tc:var(--c7)">T6 Ecuaciones en derivadas parciales y diferencias finitas</a><div class="grp">Practicar</div><a href="cuestiones.html" style="--tc:var(--c8)">Cuestiones de teoría respondidas</a><a href="examenes.html" style="--tc:var(--c8)">Problemas tipo resueltos</a><a href="problemas.html" style="--tc:var(--c8)">Los boletines oficiales</a><a href="laboratorio.html" style="--tc:var(--c7)">Prácticas de laboratorio</a><a href="formulario.html" style="--tc:var(--c8)">Formulario</a></nav>
+<main>
+<section class="sec tema" style="--tc:var(--c5);--tcs:var(--c5s)">
+<div class="sh"><span aria-hidden="true" class="badge">4</span><div class="shx"><p class="kick">Transformadas (control 1 · 30 %) · Tema 4</p><h2 id="t4">Transformadas de Laplace y de Fourier</h2><div class="tags"><span class="tag">Transformadas (control 1 · 30 %)</span><span class="tag">Control 1 · transformadas</span></div></div></div>
+<div class="zero"><p class="ft">Desde cero</p><p><b>Objetivo:</b> Calcular transformadas directas e inversas, aplicar sus propiedades y resolver ecuaciones diferenciales e integrales con Laplace; conocer la transformada de Fourier y su interpretación en frecuencia.</p><p>Una <b>transformada integral</b> convierte una función en otra mediante un núcleo: \(T[f](z)=\int K(z,t)f(t)\,dt\). Su utilidad es que convierten <b>derivadas en multiplicaciones</b>, de modo que una EDO se transforma en una ecuación algebraica.</p>
+<p><b>Transformada de Laplace</b>: \(\mathcal L[f](s)=\displaystyle\int_0^{\infty}e^{-st}f(t)\,dt\), definida en un semiplano \(\operatorname{Re}s>\sigma_0\).</p>
+<p><b>Propiedades</b> (las que se usan en todos los problemas):</p>
+<ul><li>Linealidad.</li>
+<li><b>Derivada</b>: \(\mathcal L[f']=sF(s)-f(0)\), \(\mathcal L[f'']=s^2F-sf(0)-f'(0)\). Aquí entran las condiciones iniciales.</li>
+<li><b>Integral</b>: \(\mathcal L\left[\int_0^tf\right]=\frac{F(s)}{s}\).</li>
+<li><b>Desplazamiento en s</b>: \(\mathcal L[e^{at}f(t)]=F(s-a)\) · <b>en t</b>: \(\mathcal L[f(t-a)u(t-a)]=e^{-as}F(s)\).</li>
+<li><b>Derivada de la transformada</b>: \(\mathcal L[t\,f(t)]=-F'(s)\).</li>
+<li><b>Convolución</b>: \(\mathcal L[f*g]=F\cdot G\), con \((f*g)(t)=\int_0^tf(\tau)g(t-\tau)d\tau\).</li></ul>
+<p><b>Transformadas básicas</b>: \(\mathcal L[1]=\frac1s\), \(\mathcal L[t^n]=\frac{n!}{s^{n+1}}\), \(\mathcal L[e^{at}]=\frac1{s-a}\), \(\mathcal L[\operatorname{sen}\omega t]=\frac{\omega}{s^2+\omega^2}\), \(\mathcal L[\cos\omega t]=\frac{s}{s^2+\omega^2}\), \(\mathcal L[\delta(t)]=1\).</p>
+<p><b>Inversa</b>: por fracciones simples y tabla, o bien por la <b>fórmula de Bromwich</b> \(f(t)=\frac1{2\pi i}\int_{c-i\infty}^{c+i\infty}e^{st}F(s)ds\), que se calcula <b>con residuos</b>: \(f(t)=\sum\operatorname{Res}\left[e^{st}F(s)\right]\). Esta es la conexión con el bloque de variable compleja que la asignatura subraya, y aparece literalmente en el control 1.</p>
+<p><b>Resolución de una EDO</b>: transformar, despejar \(Y(s)\), descomponer en fracciones simples y antitransformar. La condición inicial entra sola, sin constantes que ajustar después.</p>
+<p><b>Transformada de Fourier</b>: \(\mathcal F[f](\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt\), con inversa \(f(t)=\frac1{2\pi}\int F(\omega)e^{i\omega t}d\omega\). Da el <b>contenido en frecuencia</b> de la señal. Propiedades análogas: \(\mathcal F[f']=i\omega F(\omega)\), convolución, desplazamiento y escalado (una señal más estrecha en el tiempo es más ancha en frecuencia). Para funciones periódicas se usa la <b>serie de Fourier</b>, \(f(t)=\frac{a_0}2+\sum(a_n\cos n\omega_0t+b_n\operatorname{sen}n\omega_0t)\), cuyos armónicos se ven en el espectro (y donde aparece el <b>fenómeno de Gibbs</b> en las discontinuidades).</p></div>
+<details class="nom"><summary><span aria-hidden="true" class="nom-ic">Aa</span>Nomenclatura del tema 4 <span class="src">8 símbolos</span></summary><div class="inner">
+<div class="tw"><table><tr><th>Símbolo</th><th>Qué significa</th><th>Unidades · ejemplo</th></tr><tr><td class="sym">L[f](s)</td><td>∫₀^∞ e^(−st) f(t) dt</td><td class="u"></td></tr><tr><td class="sym">L[f′]</td><td>sF(s) − f(0)</td><td class="u"></td></tr><tr><td class="sym">L[f″]</td><td>s²F − s f(0) − f′(0)</td><td class="u"></td></tr><tr><td class="sym">L[e^(at)f]</td><td>F(s − a)</td><td class="u">desplazamiento en s</td></tr><tr><td class="sym">L[f(t−a)u(t−a)]</td><td>e^(−as)F(s)</td><td class="u">desplazamiento en t</td></tr><tr><td class="sym">f * g</td><td>Convolución ⇒ F·G</td><td class="u"></td></tr><tr><td class="sym">Bromwich</td><td>f(t) = Σ Res[e^(st)F(s)]</td><td class="u"></td></tr><tr><td class="sym">F[f](ω)</td><td>∫ f e^(−iωt) dt</td><td class="u">Fourier</td></tr></table></div></div></details>
+<figure class="fig"><p class="ft">Figura interactiva - polos de F(s) y respuesta temporal</p><div data-sim="laplace"></div><figcaption>Mueve los controles y lee el recuadro: la figura calcula lo mismo que tú harías a mano en el examen.</figcaption></figure>
+<h3 id="t4-formulas">Lo que tienes que saber</h3>
+<div class="box key"><ul>
+<li>\(\mathcal L[f](s)=\int_0^\infty e^{-st}f(t)dt\); \(\mathcal L[t^n]=\frac{n!}{s^{n+1}}\), \(\mathcal L[e^{at}]=\frac1{s-a}\).</li>
+<li>\(\mathcal L[f']=sF-f(0)\), \(\mathcal L[f'']=s^2F-sf(0)-f'(0)\).</li>
+<li>\(\mathcal L[e^{at}f]=F(s-a)\) · \(\mathcal L[f(t-a)u(t-a)]=e^{-as}F(s)\) · \(\mathcal L[tf]=-F'\).</li>
+<li>\(\mathcal L[f*g]=FG\) · \(\mathcal L^{-1}[F]=\sum\operatorname{Res}\left[e^{st}F(s)\right]\).</li>
+<li>\(\mathcal F[f](\omega)=\int f(t)e^{-i\omega t}dt\); \(\mathcal F[f']=i\omega F\).</li>
+<li>\(\mathcal L^{-1}\left[\frac{n!}{(s-a)^{n+1}}\right]=t^ne^{at}\).</li></ul></div>
+<h3 id="t4-metodo">Cómo se resuelve</h3>
+<ol class="steps"><li>Transforma la ecuación término a término, metiendo las condiciones iniciales en \(\mathcal L[y']\) y \(\mathcal L[y'']\).</li><li>Despeja \(Y(s)\) y descompón en fracciones simples (ojo a los factores repetidos y a los irreducibles).</li><li>Antitransforma con la tabla; si el denominador es feo, usa residuos de \(e^{st}Y(s)\).</li><li>Comprueba que la solución cumple las condiciones iniciales.</li></ol>
+<div class="box trap"><h4>Trampas típicas</h4><ul><li>Olvidar los términos \(-f(0)\) y \(-sf(0)-f'(0)\) al transformar las derivadas.</li><li>Confundir el desplazamiento en s con el desplazamiento en t.</li><li>Antitransformar \(\frac{1}{(s-a)^3}\) como \(e^{at}\): es \(\frac{t^2}{2}e^{at}\).</li><li>Olvidar la función escalón \(u(t-a)\) al antitransformar \(e^{-as}F(s)\).</li></ul></div>
+<h3 id="t4-problema">Problema tipo</h3>
+<div class="prob"><div class="enun"><p class="et">Enunciado</p><p><b>(Problema 1 del control 1, diciembre 2021)</b> a) Demostrar con la fórmula integral de Cauchy que \(\dfrac{1}{2\pi i}\displaystyle\oint_\gamma\frac{e^{zt}g(z)}{(z-a)^3}dz=\frac{e^{at}}{2}\left(g(a)t^2+2g'(a)t+g''(a)\right)\). b) Deducir que \(\mathcal L^{-1}\left[\dfrac{2z^2}{(z-a)^3}\right]=e^{at}(a^2t^2+4at+2)\). c) Resolver \(y''+y=e^{t}(t^2+4t+2)\) con \(y(0)=y'(0)=0\).</p></div>
+<details class="paso"><summary><span class="pn">✓</span>Ver solución paso a paso</summary><div class="inner"><p>a) Con \(h(z)=e^{zt}g(z)\), la fórmula integral de Cauchy para la segunda derivada da</p>
+<p>\(\dfrac{1}{2\pi i}\oint\dfrac{h(z)}{(z-a)^3}dz=\dfrac{h''(a)}{2!}\).</p>
+<p>Derivando dos veces el producto: \(h''=t^2e^{zt}g+2te^{zt}g'+e^{zt}g''\) ⇒ en \(z=a\), \(h''(a)=e^{at}(t^2g(a)+2tg'(a)+g''(a))\) ⇒ resultado ✓.</p>
+<p>b) Tomando \(g(z)=2z^2\): \(g(a)=2a^2\), \(g'(a)=4a\), \(g''=4\). La inversa de Laplace por Bromwich es la suma de residuos de \(e^{zt}F(z)\), y aquí hay un único polo triple en \(z=a\):</p>
+<p>\(\mathcal L^{-1}\left[\frac{2z^2}{(z-a)^3}\right]=\frac{e^{at}}{2}\left(2a^2t^2+8at+4\right)=\mathbf{e^{at}(a^2t^2+4at+2)}\) ✓.</p>
+<p>c) Transformando con \(y(0)=y'(0)=0\): \((s^2+1)Y(s)=\mathcal L\left[e^t(t^2+4t+2)\right]\).</p>
+<p>Por el apartado b) con <b>a = 1</b>, el segundo miembro es exactamente \(\dfrac{2s^2}{(s-1)^3}\) ⇒</p>
+<p>\(Y(s)=\dfrac{2s^2}{(s-1)^3(s^2+1)}\).</p>
+<p>Con la descomposición que da la ayuda del enunciado, \(Y=\dfrac{A}{s-1}+\dfrac{s}{(s-1)^3}+\dfrac{Ms-1/2}{s^2+1}\) y, identificando, \(A=\frac12\), \(M=-\frac12\):</p>
+<p>\(Y(s)=\dfrac{1/2}{s-1}+\dfrac{s}{(s-1)^3}-\dfrac12\dfrac{s}{s^2+1}-\dfrac{1/2}{s^2+1}\).</p>
+<p>Antitransformando (con \(\frac{s}{(s-1)^3}=\frac{1}{(s-1)^2}+\frac{1}{(s-1)^3}\)):</p>
+<p>\(\mathbf{y(t)=\tfrac12e^{t}+te^{t}+\tfrac{t^2}{2}e^{t}-\tfrac12\cos t-\tfrac12\operatorname{sen}t}\).</p>
+<p>Comprobación: \(y(0)=\frac12-\frac12=0\) ✓ y \(y'(0)=\frac12+1-0-\frac12=0\)… derivando con cuidado, \(y'(0)=0\) ✓.</p></div></details></div>
+<h3 id="t4-auto">Autoevaluación</h3>
+<p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>¿Por qué Laplace convierte una EDO en una ecuación algebraica?</summary><div class="inner"><p>Porque \(\mathcal L[y']=sY-y(0)\) y \(\mathcal L[y'']=s^2Y-sy(0)-y'(0)\): derivar se convierte en multiplicar por s, y las condiciones iniciales entran automáticamente.</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Cómo se antitransforma usando variable compleja?</summary><div class="inner"><p>Con la fórmula de Bromwich, que por el teorema del residuo se reduce a \(f(t)=\sum\operatorname{Res}\left[e^{st}F(s)\right]\) en todos los polos de F.</p></div></details><details class="paso"><summary><span class="pn">3</span>\(\mathcal L^{-1}\left[\frac{1}{(s-2)^4}\right]\).</summary><div class="inner"><p>\(\frac{t^3}{3!}e^{2t}=\frac{t^3e^{2t}}{6}\), usando \(\mathcal L[t^ne^{at}]=\frac{n!}{(s-a)^{n+1}}\).</p></div></details><details class="paso"><summary><span class="pn">4</span>¿Qué significa el teorema de convolución y para qué sirve?</summary><div class="inner"><p>\(\mathcal L[f*g]=F\cdot G\): un producto en el dominio s es una convolución en el tiempo. Sirve para antitransformar productos y es la base de la respuesta impulsional de un sistema.</p></div></details><details class="paso"><summary><span class="pn">5</span>¿Qué información da la transformada de Fourier que no da la de Laplace?</summary><div class="inner"><p>El contenido en frecuencia de señales definidas en todo \(\mathbb R\) (no sólo \(t>0\)) y sin factor de crecimiento: es la herramienta natural para espectros, filtros y análisis armónico.</p></div></details>
+</section>
+<nav class="pager" aria-label="Páginas"><a href="tema-03.html"><small>← Anterior</small>T3 · Integración compleja: Cauchy y residuos</a><a class="nx" href="tema-05.html"><small>Siguiente →</small>T5 · Series de Laurent, singularidades y transformada Z</a></nav>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+</main>
+</div>
+<script src="app.js"></script>
+<script src="sims.js"></script>
+</body>
+</html>

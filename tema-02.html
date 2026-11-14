@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T2 Funciones de variable compleja y holomorfía · Matemáticas III · Guía para aprobar</title>
+<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 2, Funciones de variable compleja y holomorfía">
+<meta name="theme-color" content="#1b6e8c">
+<link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link rel="stylesheet" href="style.css">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="hub-bar" style="max-width:1180px;margin:0 auto;padding:10px 16px 0"><a href="https://helionacon-ui.github.io/GIEIA-UPCT/" style="display:inline-flex;align-items:center;gap:6px;font:600 13.5px/1 system-ui,sans-serif;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none">← Todas las guías GIEyA</a><p class="fecha" style="margin:6px 0 0;max-width:none;font:13px/1.45 system-ui,sans-serif;color:var(--muted)">Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p></div>
+<div class="crumb"><a href="index.html">Matemáticas III</a><span class="sep">›</span><span>Variable compleja (control 2 · 50 %)</span><span class="sep">›</span><span>T2 · Funciones de variable compleja y holomorfía</span></div><a href="#top" class="totop" id="totop" aria-label="Volver arriba">↑</a>
+<div class="wrap" id="top">
+<nav aria-label="Índice" class="toc"><a href="index.html" style="--tc:var(--c0)">Portada</a><div class="grp">Empezar</div><a href="index.html#cero" style="--tc:var(--c0)">Empieza aquí desde cero</a><a href="plan.html" style="--tc:var(--c0)">Cómo es la evaluación</a><a href="index.html#progreso" style="--tc:var(--c0)">Tu progreso</a><div class="grp">Variable compleja (control 2 · 50 %)</div><a href="tema-01.html" style="--tc:var(--c2)">T1 Números complejos: operaciones y forma polar</a><a href="tema-02.html" style="--tc:var(--c3)" class="on" aria-current="page">T2 Funciones de variable compleja y holomorfía</a><a href="tema-03.html" style="--tc:var(--c4)">T3 Integración compleja: Cauchy y residuos</a><a href="tema-05.html" style="--tc:var(--c6)">T5 Series de Laurent, singularidades y transformada Z</a><div class="grp">Transformadas (control 1 · 30 %)</div><a href="tema-04.html" style="--tc:var(--c5)">T4 Transformadas de Laplace y de Fourier</a><a href="tema-06.html" style="--tc:var(--c7)">T6 Ecuaciones en derivadas parciales y diferencias finitas</a><div class="grp">Practicar</div><a href="cuestiones.html" style="--tc:var(--c8)">Cuestiones de teoría respondidas</a><a href="examenes.html" style="--tc:var(--c8)">Problemas tipo resueltos</a><a href="problemas.html" style="--tc:var(--c8)">Los boletines oficiales</a><a href="laboratorio.html" style="--tc:var(--c7)">Prácticas de laboratorio</a><a href="formulario.html" style="--tc:var(--c8)">Formulario</a></nav>
+<main>
+<section class="sec tema" style="--tc:var(--c3);--tcs:var(--c3s)">
+<div class="sh"><span aria-hidden="true" class="badge">2</span><div class="shx"><p class="kick">Variable compleja (control 2 · 50 %) · Tema 2</p><h2 id="t2">Funciones de variable compleja y holomorfía</h2><div class="tags"><span class="tag">Variable compleja (control 2 · 50 %)</span><span class="tag">Control 2 · variable compleja</span></div></div></div>
+<div class="zero"><p class="ft">Desde cero</p><p><b>Objetivo:</b> Estudiar límites y continuidad en C, aplicar las ecuaciones de Cauchy-Riemann, reconocer funciones analíticas y armónicas y manejar las funciones elementales y las transformaciones de Möbius.</p><p><b>Topología en C</b>: disco \(D(z_0;r)=\{z:|z-z_0|<r\}\); un conjunto es <b>abierto</b> si todos sus puntos son interiores, <b>conexo</b> si dos puntos cualesquiera se unen por una poligonal dentro, y <b>región</b> (o dominio) si es abierto y conexo.</p>
+<p>Una función \(f(z)=u(x,y)+iv(x,y)\) equivale a dos funciones reales. El límite y la continuidad se definen como en \(\mathbb R^2\), <b>con la misma advertencia</b>: el límite debe ser el mismo por todos los caminos.</p>
+<p><b>Derivada compleja</b>: \(f'(z_0)=\lim_{h\to0}\frac{f(z_0+h)-f(z_0)}{h}\) con \(h\in\mathbb C\). Que el límite exista <b>sea cual sea la dirección</b> de h es muchísimo más exigente que en \(\mathbb R^2\), y de ahí salen las</p>
+<p><b>Ecuaciones de Cauchy-Riemann</b>: \(\dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y}\) y \(\dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}\).</p>
+<p>Si además las parciales son continuas, f es <b>derivable</b> y \(f'=u_x+iv_x=v_y-iu_y\). Una función derivable en todo un entorno se llama <b>analítica u holomorfa</b> ahí; si lo es en todo \(\mathbb C\), <b>entera</b>.</p>
+<p><b>Consecuencia fuerte</b>: si f es holomorfa, u y v son <b>armónicas</b> (\(u_{xx}+u_{yy}=0\)) y <b>armónicas conjugadas</b> entre sí. Dada u armónica, se reconstruye v integrando las ecuaciones de C-R (ejercicio típico de examen). Además las curvas \(u=c_1\) y \(v=c_2\) se cortan <b>perpendicularmente</b>.</p>
+<p><b>Funciones elementales</b>:</p>
+<ul><li>\(e^z=e^x(\cos y+i\operatorname{sen}y)\): entera, <b>periódica</b> de periodo \(2\pi i\), nunca nula.</li>
+<li>\(\operatorname{sen}z=\frac{e^{iz}-e^{-iz}}{2i}\), \(\cos z=\frac{e^{iz}+e^{-iz}}{2}\): enteras pero <b>no acotadas</b> (al contrario que en \(\mathbb R\)); \(\operatorname{sen}(iy)=i\operatorname{senh}y\) crece sin límite.</li>
+<li>\(\operatorname{Log}z\): holomorfa salvo en el <b>corte de rama</b> \((-\infty,0]\), con \((\operatorname{Log}z)'=1/z\).</li>
+<li>Hiperbólicas: \(\cosh z=\cos(iz)\), \(\operatorname{senh}z=-i\operatorname{sen}(iz)\); aparecen en catenarias y tractrices.</li></ul>
+<p><b>Transformaciones de Möbius</b> \(w=\dfrac{az+b}{cz+d}\) con \(ad-bc\neq0\): son biyectivas en la esfera de Riemann, <b>conformes</b> (conservan ángulos) y llevan rectas y circunferencias en rectas y circunferencias. Se componen de traslaciones, giros, homotecias e inversión \(1/z\).</p></div>
+<details class="nom"><summary><span aria-hidden="true" class="nom-ic">Aa</span>Nomenclatura del tema 2 <span class="src">7 símbolos</span></summary><div class="inner">
+<div class="tw"><table><tr><th>Símbolo</th><th>Qué significa</th><th>Unidades · ejemplo</th></tr><tr><td class="sym">f = u + iv</td><td>Parte real e imaginaria</td><td class="u"></td></tr><tr><td class="sym">C-R</td><td>u_x = v_y, u_y = −v_x</td><td class="u"></td></tr><tr><td class="sym">holomorfa</td><td>Derivable en un entorno</td><td class="u">entera si en todo C</td></tr><tr><td class="sym">armónica</td><td>Δu = u_xx + u_yy = 0</td><td class="u"></td></tr><tr><td class="sym">e^z</td><td>e^x(cos y + i sen y)</td><td class="u">periodo 2πi</td></tr><tr><td class="sym">sen z, cos z</td><td>En términos de e^(iz)</td><td class="u">no acotadas</td></tr><tr><td class="sym">Möbius</td><td>(az+b)/(cz+d)</td><td class="u">conforme</td></tr></table></div></div></details>
+<figure class="fig"><p class="ft">Figura interactiva - transformacion conforme y Cauchy-Riemann</p><div data-sim="conforme"></div><figcaption>Mueve los controles y lee el recuadro: la figura calcula lo mismo que tú harías a mano en el examen.</figcaption></figure>
+<h3 id="t2-formulas">Lo que tienes que saber</h3>
+<div class="box key"><ul>
+<li>C-R: \(u_x=v_y\), \(u_y=-v_x\) ⇒ \(f'=u_x+iv_x\).</li>
+<li>Armónica: \(u_{xx}+u_{yy}=0\); la conjugada se obtiene integrando C-R.</li>
+<li>\(e^z=e^x(\cos y+i\operatorname{sen}y)\), periodo \(2\pi i\), \(e^z\neq0\).</li>
+<li>\(\operatorname{sen}^2z+\cos^2z=1\); \(|\operatorname{sen}z|\) no está acotado.</li>
+<li>Möbius \(w=\frac{az+b}{cz+d}\), \(ad-bc\neq0\): conforme, lleva circunferencias y rectas en circunferencias y rectas.</li></ul></div>
+<h3 id="t2-metodo">Cómo se resuelve</h3>
+<ol class="steps"><li>Separa \(f=u+iv\) en parte real e imaginaria antes de nada.</li><li>Comprueba C-R; si se cumplen con parciales continuas, f es holomorfa y \(f'=u_x+iv_x\).</li><li>Para hallar la armónica conjugada: integra \(v_y=u_x\) respecto de y y ajusta la constante con \(v_x=-u_y\).</li><li>Para resolver ecuaciones con funciones elementales, pasa todo a exponenciales y despeja \(e^{iz}\) o \(e^z\), sin olvidar el \(2k\pi i\).</li></ol>
+<div class="box trap"><h4>Trampas típicas</h4><ul><li>Suponer que si existen \(u_x,u_y,v_x,v_y\) la función es derivable: hay que comprobar C-R.</li><li>Creer que \(|\operatorname{sen}z|\le1\) en C: es falso.</li><li>Olvidar que \(\log z\) es multivaluado y que el valor principal tiene corte de rama.</li><li>Derivar \(\bar z\) como si fuera holomorfa: \(f(z)=\bar z\) NO satisface C-R en ningún punto.</li></ul></div>
+<h3 id="t2-problema">Problema tipo</h3>
+<div class="prob"><div class="enun"><p class="et">Enunciado</p><p><b>(Tipo examen)</b> a) Estudiar dónde es derivable \(f(z)=z\bar z\) y dónde es holomorfa. b) Comprobar que \(u(x,y)=x^3-3xy^2\) es armónica y hallar su armónica conjugada v y la función holomorfa \(f=u+iv\).</p></div>
+<details class="paso"><summary><span class="pn">✓</span>Ver solución paso a paso</summary><div class="inner"><p>a) \(f(z)=z\bar z=x^2+y^2\) ⇒ \(u=x^2+y^2\), \(v=0\).</p>
+<p>C-R: \(u_x=2x\) y \(v_y=0\) ⇒ \(2x=0\); \(u_y=2y\) y \(-v_x=0\) ⇒ \(2y=0\). Sólo se cumplen en \(\mathbf{z=0}\).</p>
+<p>Luego f es derivable <b>únicamente en el origen</b> (con \(f'(0)=0\)) y <b>no es holomorfa en ningún punto</b>, porque la holomorfía exige derivabilidad en todo un entorno.</p>
+<p>b) \(u_x=3x^2-3y^2\), \(u_{xx}=6x\); \(u_y=-6xy\), \(u_{yy}=-6x\) ⇒ \(u_{xx}+u_{yy}=0\) ✓ <b>armónica</b>.</p>
+<p>Por C-R: \(v_y=u_x=3x^2-3y^2\) ⇒ \(v=3x^2y-y^3+\varphi(x)\).</p>
+<p>Y \(v_x=6xy+\varphi'(x)\) debe ser \(-u_y=6xy\) ⇒ \(\varphi'=0\) ⇒ \(\varphi=C\).</p>
+<p>\(v=3x^2y-y^3+C\) y \(f(z)=x^3-3xy^2+i(3x^2y-y^3)+iC=\mathbf{z^3+iC}\).</p>
+<p>Comprobación: \(z^3=(x+iy)^3=x^3-3xy^2+i(3x^2y-y^3)\) ✓.</p></div></details></div>
+<h3 id="t2-auto">Autoevaluación</h3>
+<p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>Enuncia las ecuaciones de Cauchy-Riemann y qué garantizan.</summary><div class="inner"><p>\(u_x=v_y\) y \(u_y=-v_x\). Si se cumplen Y las parciales son continuas en un entorno, f es holomorfa allí, con \(f'=u_x+iv_x\).</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Es \(f(z)=\bar z\) holomorfa?</summary><div class="inner"><p>No en ningún punto: \(u=x\), \(v=-y\) dan \(u_x=1\neq v_y=-1\). Es continua pero no derivable: la derivada depende de la dirección.</p></div></details><details class="paso"><summary><span class="pn">3</span>¿Qué relación hay entre funciones holomorfas y armónicas?</summary><div class="inner"><p>Si \(f=u+iv\) es holomorfa, u y v son armónicas (\(\Delta u=\Delta v=0\)) y son armónicas conjugadas; sus curvas de nivel se cortan ortogonalmente.</p></div></details><details class="paso"><summary><span class="pn">4</span>¿Por qué \(e^z\) no tiene ceros y qué periodo tiene?</summary><div class="inner"><p>\(|e^z|=e^x>0\) siempre, así que nunca se anula; y \(e^{z+2\pi i}=e^z\): es periódica de periodo \(2\pi i\).</p></div></details><details class="paso"><summary><span class="pn">5</span>¿Qué conserva una transformación de Möbius?</summary><div class="inner"><p>Los ángulos (es conforme donde su derivada no se anula) y la familia de rectas y circunferencias: una recta puede transformarse en circunferencia y viceversa.</p></div></details>
+</section>
+<nav class="pager" aria-label="Páginas"><a href="tema-01.html"><small>← Anterior</small>T1 · Números complejos: operaciones y forma polar</a><a class="nx" href="tema-03.html"><small>Siguiente →</small>T3 · Integración compleja: Cauchy y residuos</a></nav>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+</main>
+</div>
+<script src="app.js"></script>
+<script src="sims.js"></script>
+</body>
+</html>
