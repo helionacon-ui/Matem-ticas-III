@@ -58,7 +58,7 @@ const PlanoC=(a,cx,cy,SC,R)=>{
     if(Math.abs(i*SC)<R){a.line(X,cy-4,X,cy+4,C.muted,1);a.line(cx-4,Y,cx+4,Y,C.muted,1);}}};
 
 /* T1 · Plano complejo: operaciones, potencias y raíces */
-SIMS.complejos=el=>build(el,{w:660,h:420,
+SIMS.complejos=el=>build(el,{w:660,h:370,
  selects:[{k:'op',v:'raiz',l:'operación',opts:[['suma','z₁ + z₂'],['prod','z₁ · z₂'],['div','z₁ / z₂'],['pot','z₁ elevado a n'],['raiz','raíces n-ésimas de z₁'],['conj','conjugado e inverso de z₁']]}],
  sliders:[{k:'r1',v:2,min:0.2,max:3,step:0.05,l:'módulo de z₁',u:''},{k:'a1',v:0.25,min:-1,max:1,step:0.01,l:'argumento de z₁ (×π)',u:''},
   {k:'r2',v:1.2,min:0.2,max:3,step:0.05,l:'módulo de z₂',u:''},{k:'a2',v:0.5,min:-1,max:1,step:0.01,l:'argumento de z₂ (×π)',u:''},
@@ -96,7 +96,9 @@ SIMS.complejos=el=>build(el,{w:660,h:420,
     a.circ(cx,cy,r*SC,C.c,false);
     const raices=[];
     for(let k=0;k<n;k++){const w=Cx(r*Math.cos(th+2*Math.PI*k/n),r*Math.sin(th+2*Math.PI*k/n));raices.push(w);
-      const [X,Y]=P(w);a.circ(X,Y,6,C.c,true);a.txt('w'+k,X+8,Y-8,C.c,12);}
+      const [X,Y]=P(w);a.circ(X,Y,6,C.c,true);
+      const ux=X-cx, uy=Y-cy, un=Math.hypot(ux,uy)||1;
+      a.txt('w'+k,X+ux/un*16,Y+uy/un*16+4,C.c,12,ux>4?'left':(ux<-4?'right':'center'));}
     a.g.strokeStyle=C.c;a.g.lineWidth=1.4;a.g.beginPath();
     raices.forEach((w,i)=>{const [X,Y]=P(w);i===0?a.g.moveTo(X,Y):a.g.lineTo(X,Y);});
     a.g.closePath();a.g.stroke();
@@ -120,7 +122,7 @@ SIMS.complejos=el=>build(el,{w:660,h:420,
   <span class="hint">Multiplicar por un complejo = girar su argumento y escalar su módulo. Esa es toda la intuición que hace falta para fasores, impedancias y transformadas.</span>`);}});
 
 /* T2 · Transformación conforme y Cauchy-Riemann */
-SIMS.conforme=el=>build(el,{w:660,h:420,
+SIMS.conforme=el=>build(el,{w:660,h:370,
  selects:[{k:'f',v:'z2',l:'función w = f(z)',opts:[['z2','f(z) = z²'],['exp','f(z) = e^z'],['inv','f(z) = 1/z'],['mob','f(z) = (z−1)/(z+1)  (Möbius)'],['sen','f(z) = sen z'],['conj','f(z) = z̄  (NO holomorfa)']]}],
  sliders:[{k:'px',v:1,min:-2,max:2,step:0.05,l:'parte real del punto',u:''},{k:'py',v:0.6,min:-2,max:2,step:0.05,l:'parte imaginaria',u:''}],
  draw(a){a.clear();
@@ -164,7 +166,7 @@ SIMS.conforme=el=>build(el,{w:660,h:420,
   <span class="hint">${a.st.f==='z2'?'z² duplica los ángulos respecto del origen: por eso en z = 0 (donde f′ = 0) se pierde la conformidad.':(a.st.f==='mob'?'Una transformación de Möbius lleva rectas y circunferencias en rectas y circunferencias.':'Mueve el punto y compara su posición en los dos planos.')}</span>`);}});
 
 /* T3 · Teorema de los residuos */
-SIMS.residuos=el=>build(el,{w:660,h:420,
+SIMS.residuos=el=>build(el,{w:660,h:370,
  selects:[{k:'f',v:'p2',l:'función',opts:[['p1','f(z) = 1/(z²+1)'],['p2','f(z) = (z−2)cos((z−2)μ)/(z²−4z+5)'],['p3','f(z) = e^z/(z²(z−1))'],['p4','f(z) = 1/(z²+1)²']]}],
  sliders:[{k:'cx',v:1,min:-3,max:4,step:0.1,l:'centro del contorno (Re)',u:''},{k:'cy',v:0,min:-3,max:3,step:0.1,l:'centro (Im)',u:''},{k:'r',v:2.5,min:0.3,max:4,step:0.05,l:'radio del contorno',u:''},{k:'mu',v:1,min:0,max:2,step:0.05,l:'parámetro μ',u:''}],
  draw(a){a.clear();
@@ -190,7 +192,7 @@ SIMS.residuos=el=>build(el,{w:660,h:420,
   // flecha de orientacion
   const ang=0.6;const XA=cx+C0.re*SC+r*SC*Math.cos(ang), YA=cy-C0.im*SC-r*SC*Math.sin(ang);
   a.arrow(XA,YA,XA-18*Math.sin(ang),YA-18*Math.cos(ang),C.a,2.5);
-  a.txt('γ',cx+C0.re*SC+r*SC+8,cy-C0.im*SC,C.a,14);
+  a.txt('γ',cx+C0.re*SC,cy-C0.im*SC-r*SC-10,C.a,14,'center');
   // polos
   let suma=Cx(0,0),dentro=[];
   inf.polos.forEach(p=>{const [X,Y]=P(p.z);
@@ -215,15 +217,20 @@ SIMS.residuos=el=>build(el,{w:660,h:420,
   <span class="hint">Mueve el centro y el radio: lo único que cambia la integral es QUÉ polos quedan dentro. Deformar la curva sin cruzar un polo no altera el valor.</span>`);}});
 
 /* T4 · Laplace: polos, respuesta temporal y EDO */
-SIMS.laplace=el=>build(el,{w:660,h:420,
+SIMS.laplace=el=>build(el,{w:660,h:390,
  selects:[{k:'f',v:'osc',l:'F(s)',opts:[['exp','F = 1/(s−a)  →  e^(at)'],['osc','F = ω/((s−a)²+ω²)  →  e^(at)·sen ωt'],['t2','F = 2/(s−a)³  →  t²e^(at)'],['edo','EDO: y″ + 2ζω y′ + ω²y = 1  (escalón)']]}],
  sliders:[{k:'a',v:-0.5,min:-2,max:1,step:0.05,l:'a (parte real del polo)',u:''},{k:'w',v:3,min:0.2,max:8,step:0.1,l:'ω',u:''},{k:'z',v:0.3,min:0,max:1.5,step:0.02,l:'amortiguamiento ζ (sólo EDO)',u:''}],
  draw(a){a.clear();
   const A=a.st.a,W=a.st.w,Z=a.st.z;
   // plano s
-  const cx=150,cy=180,R=130,SC=R/2.6;
+  const cx=150,cy=175,R=125;
+  let maxMod=2.6;
+  if(a.st.f==='osc')maxMod=Math.max(maxMod,Math.hypot(A,W));
+  else if(a.st.f==='edo'){const wd=Z<1?W*Math.sqrt(1-Z*Z):0;maxMod=Math.max(maxMod,Math.hypot(Z*W,wd),W);}
+  else maxMod=Math.max(maxMod,Math.abs(A));
+  const SC=R/(maxMod*1.18);
   PlanoC(a,cx,cy,SC,R);
-  a.txt('plano s',cx,cy-R-18,C.text,13,'center');
+  a.txt('plano s',cx,cy-R-22,C.text,13,'center');
   a.g.fillStyle=C.c;a.g.globalAlpha=0.08;a.g.fillRect(cx-R,cy-R,R,2*R);a.g.globalAlpha=1;
   a.txt('estable',cx-R+6,cy+R-6,C.c,10);
   let polos=[],nom='',ft=null,tmax=10;
@@ -242,7 +249,7 @@ SIMS.laplace=el=>build(el,{w:660,h:420,
   if(a.st.f==='edo'&&Z<1){const X=cx-Z*W*SC,Y=cy-W*Math.sqrt(1-Z*Z)*SC;
     a.line(cx,cy,X,Y,C.muted,1.2,[4,3]);a.txt('ωn = '+N2(W),X-6,Y-10,C.muted,11,'right');}
   // respuesta temporal
-  const x0=330,y0=330,wv=290,hv=250;
+  const x0=330,y0=310,wv=290,hv=230;
   Eje(a,x0,y0-hv/2,wv,0,'t','');
   a.line(x0,y0,x0,y0-hv,C.muted,1.5);
   const ys=[];for(let i=0;i<=300;i++)ys.push(ft(tmax*i/300));
@@ -255,6 +262,8 @@ SIMS.laplace=el=>build(el,{w:660,h:420,
   a.txt('respuesta f(t)',x0+4,y0-hv+14,C.text,12);
   a.txt('0',x0-8,py(0)+4,C.muted,10,'right');
   a.txt(N2(tmax),x0+wv,y0-hv/2+18,C.muted,10,'center');
+  const bx=60,by=352;
+  a.txt('polos: '+polos.map(p=>N2(p.re)+(Math.abs(p.im)>1e-9?(p.im>0?' + ':' − ')+N2(Math.abs(p.im))+'i':'')).join('  ·  '),bx,by,C.muted,12);
   const estable=polos.every(p=>p.re<1e-9);
   let txt='';
   if(a.st.f==='edo'){const sob=Z<1?Math.exp(-Math.PI*Z/Math.sqrt(1-Z*Z))*100:0;
@@ -265,9 +274,9 @@ SIMS.laplace=el=>build(el,{w:660,h:420,
   <span class="hint">Esta es la lectura que se usará en Regulación Automática: la posición de los polos de F(s) determina por completo la forma de f(t).</span>`);}});
 
 /* T5 · Series de Laurent y clasificación de singularidades */
-SIMS.laurent=el=>build(el,{w:660,h:400,
+SIMS.laurent=el=>build(el,{w:660,h:340,
  selects:[{k:'f',v:'sen',l:'función',opts:[['sen','f(z) = z¹²·sen(1/z)  (control 2)'],['exp','f(z) = e^(1/z)'],['pol','f(z) = 1/(z(z−1))'],['evit','f(z) = sen(z)/z']]}],
- sliders:[{k:'N',v:6,min:1,max:14,step:1,l:'términos mostrados',u:''}],
+ sliders:[{k:'N',v:8,min:1,max:14,step:1,l:'términos mostrados',u:''}],
  draw(a){a.clear();
   const N=Math.round(a.st.N);
   const fact=n=>{let r=1;for(let i=2;i<=n;i++)r*=i;return r;};
@@ -301,17 +310,17 @@ SIMS.laurent=el=>build(el,{w:660,h:400,
   terms.forEach(t=>{const X=px(t.exp);const col=t.exp<0?C.a:C.f;
     const h=Math.min(70,14+Math.abs(Math.log10(Math.abs(t.coef)+1e-18))*7);
     a.line(X,y0,X,y0-h,col,3);a.circ(X,y0-h,5,col,true);
-    if(t.exp===-1){a.txt('RESIDUO',X,y0-h-14,C.b,12,'center');a.circ(X,y0-h,9,C.b,false);}});
+    if(t.exp===-1){a.txt('residuo',X+12,y0-h+4,C.b,12);a.circ(X,y0-h,9,C.b,false);}});
   a.txt('f(z) = '+nom,x0,y0-130,C.text,15);
   // etiquetas de terminos
-  a.txt(terms.slice(0,6).map((t,i)=>(t.coef<0?'−':(i?'+':''))+t.txt.replace('−','')).join(' '),x0,y0+90,C.muted,12);
+  a.txt(terms.slice(0,8).map((t,i)=>(t.coef<0?'−':(i?'+':''))+t.txt.replace('−','')).join(' '),x0,y0+92,C.muted,12);
   a.html(`<b>f(z) = ${nom}</b>, desarrollo de Laurent alrededor de z₀ = 0.<br>
   Tipo de singularidad: <b>${tipo}</b> · Residuo: <b>${residuo}</b>.<br>
   ${nota}<br>
   <span class="hint">La clasificación se lee en la parte principal: ninguno (evitable), finitos (polo de ese orden), infinitos (esencial). Y el residuo es SIEMPRE el coeficiente de z⁻¹.</span>`);}});
 
 /* T6 · Diferencias finitas para la ecuación del calor */
-SIMS.edp=el=>build(el,{w:660,h:420,
+SIMS.edp=el=>build(el,{w:660,h:390,
  selects:[{k:'ini',v:'sen',l:'condición inicial',opts:[['sen','u(x,0) = sen(πx)'],['pulso','pulso centrado'],['rampa','rampa']]}],
  sliders:[{k:'lam',v:0.4,min:0.05,max:0.9,step:0.01,l:'λ = αk/h²  (estabilidad: ≤ 0,5)',u:''},{k:'nx',v:20,min:6,max:40,step:1,l:'nodos en x',u:''},{k:'pasos',v:40,min:1,max:300,step:1,l:'pasos de tiempo',u:''}],
  draw(a){a.clear();
