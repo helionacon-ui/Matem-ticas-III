@@ -413,5 +413,35 @@ SIMS.fourier=el=>build(el,{w:660,h:420,
   ${a.st.f==='cuad'||a.st.f==='dsierra'||a.st.f==='rect'?`<b>Fenómeno de Gibbs</b>: junto al salto la suma parcial se pasa un <b>${N2(Math.max(0,over))} %</b> por encima, y ese sobreimpulso <b>no desaparece</b> al aumentar N (sólo se estrecha). Es el ≈9 % clásico.`:'Al ser continua, la serie converge uniformemente y no hay fenómeno de Gibbs.'}<br>
   <span class="hint">Cuanto más suave es la señal, más rápido decaen sus armónicos: una discontinuidad cuesta 1/n, un pico 1/n². Esa es la idea que luego se usa en filtrado y muestreo.</span>`);}});
 
+
+/* ---- Plano z: polos, ROC y respuesta al impulso ---- */
+SIMS.planoz=el=>build(el,{w:640,h:340,
+ sliders:[{k:'r',v:0.8,min:0.2,max:1.3,step:0.01,l:'módulo del polo r',u:''},{k:'th',v:40,min:0,max:180,step:1,l:'ángulo θ',u:'°'}],
+ draw(a){a.clear();const r=a.st.r,th=a.st.th*Math.PI/180;
+  const cx=130,cy=170,u=100;
+  /* plano z */
+  const g=a.g;
+  g.fillStyle='rgba(180,115,12,0.10)';g.beginPath();g.rect(cx-1.5*u,cy-1.5*u,3*u,3*u);g.fill();
+  g.save();g.beginPath();g.rect(cx-1.5*u,cy-1.5*u,3*u,3*u);g.clip();
+  g.fillStyle='rgba(44,138,82,0.18)';g.beginPath();g.rect(cx-1.5*u,cy-1.5*u,3*u,3*u);g.arc(cx,cy,r*u,0,Math.PI*2,true);g.fill('evenodd');g.restore();
+  a.line(cx-1.5*u,cy,cx+1.5*u,cy,C.grid,1);a.line(cx,cy-1.5*u,cx,cy+1.5*u,C.grid,1);
+  g.strokeStyle=C.text;g.lineWidth=2;g.beginPath();g.arc(cx,cy,u,0,Math.PI*2);g.stroke();
+  g.strokeStyle=C.c;g.setLineDash([5,4]);g.lineWidth=2;g.beginPath();g.arc(cx,cy,r*u,0,Math.PI*2);g.stroke();g.setLineDash([]);
+  const px=cx+r*u*Math.cos(th),py=cy-r*u*Math.sin(th);
+  [py,2*cy-py].forEach(y=>{a.line(px-6,y-6,px+6,y+6,C.d,3);a.line(px-6,y+6,px+6,y-6,C.d,3);});
+  a.txt('Re z',cx+1.5*u-30,cy+14,C.muted,11);a.txt('Im z',cx+6,cy-1.5*u+12,C.muted,11);a.txt('|z| = 1',cx+u*0.72,cy-u*0.78,C.text,11);
+  a.txt('ROC: |z| > '+F(r)+' (verde)',12,330,C.c,12);
+  /* respuesta al impulso h[n] = r^n sin((n+1)θ)/sinθ */
+  const x0=320,y0=170,N=26,dx=11;
+  a.line(x0,y0,x0+N*dx,y0,C.text,1.5);a.line(x0,y0-130,x0,y0+130,C.text,1.5);
+  const h=n=>Math.abs(Math.sin(th))<1e-6?Math.pow(r,n)*(n+1)*Math.cos(n*th):Math.pow(r,n)*Math.sin((n+1)*th)/Math.sin(th);
+  let mx=1;for(let n=0;n<N;n++)mx=Math.max(mx,Math.abs(h(n)));const sc=Math.min(110/mx,110);
+  for(let n=0;n<N;n++){const y=y0-h(n)*sc;const X=x0+n*dx+6;a.line(X,y0,X,Math.max(Math.min(y,y0+130),y0-130),C.a,2);a.circ(X,Math.max(Math.min(y,y0+130),y0-130),3,C.a,true);}
+  a.txt('h[n]',x0+N*dx-18,y0-120,C.a,12);a.txt('n',x0+N*dx-6,y0+16,C.muted,11);
+  const est=r<0.9999?'ESTABLE (los polos están dentro del círculo unidad)':(r<1.0001?'MARGINALMENTE ESTABLE (polos en el círculo unidad: oscila sin amortiguarse)':'INESTABLE (polos fuera: la respuesta crece)');
+  a.html(`Polos en z = ${F(r)}·e<sup>±j${F(a.st.th)}°</sup>. <b style="color:${r<0.9999?'#2c8a52':'#c43d63'}">${est}</b>.<br>
+  La envolvente es r<sup>n</sup> (${r<1?'decae':'crece'} un ${F(Math.abs(1-r)*100)} % por muestra) y h[n] oscila con periodo ≈ ${a.st.th<1?'∞':F(360/a.st.th)} muestras.<br>
+  <span class="hint">H(z) = z² / (z² − 2r cosθ·z + r²). Con θ = 0 (polo real) no hay oscilación; con θ = 180° la señal cambia de signo en cada muestra.</span>`);}});
+
 document.querySelectorAll('[data-sim]').forEach(el=>{const f=SIMS[el.dataset.sim];if(f)f(el);});
 })();
