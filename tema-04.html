@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T4 Transformadas de Laplace y de Fourier · Matemáticas III · Guía para aprobar</title>
-<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 4, Transformadas de Laplace y de Fourier">
+<meta name="description" content="Matemáticas III (GIEyA): tema 4, Transformadas de Laplace y de Fourier">
 <meta name="theme-color" content="#1b6e8c">
 <link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
 <p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>¿Por qué Laplace convierte una EDO en una ecuación algebraica?</summary><div class="inner"><p>Porque \(\mathcal L[y']=sY-y(0)\) y \(\mathcal L[y'']=s^2Y-sy(0)-y'(0)\): derivar se convierte en multiplicar por s, y las condiciones iniciales entran automáticamente.</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Cómo se antitransforma usando variable compleja?</summary><div class="inner"><p>Con la fórmula de Bromwich, que por el teorema del residuo se reduce a \(f(t)=\sum\operatorname{Res}\left[e^{st}F(s)\right]\) en todos los polos de F.</p></div></details><details class="paso"><summary><span class="pn">3</span>\(\mathcal L^{-1}\left[\frac{1}{(s-2)^4}\right]\).</summary><div class="inner"><p>\(\frac{t^3}{3!}e^{2t}=\frac{t^3e^{2t}}{6}\), usando \(\mathcal L[t^ne^{at}]=\frac{n!}{(s-a)^{n+1}}\).</p></div></details><details class="paso"><summary><span class="pn">4</span>¿Qué significa el teorema de convolución y para qué sirve?</summary><div class="inner"><p>\(\mathcal L[f*g]=F\cdot G\): un producto en el dominio s es una convolución en el tiempo. Sirve para antitransformar productos y es la base de la respuesta impulsional de un sistema.</p></div></details><details class="paso"><summary><span class="pn">5</span>¿Qué información da la transformada de Fourier que no da la de Laplace?</summary><div class="inner"><p>El contenido en frecuencia de señales definidas en todo \(\mathbb R\) (no sólo \(t>0\)) y sin factor de crecimiento: es la herramienta natural para espectros, filtros y análisis armónico.</p></div></details>
 </section>
 <nav class="pager" aria-label="Páginas"><a href="tema-03.html"><small>← Anterior</small>T3 · Integración compleja: Cauchy y residuos</a><a class="nx" href="tema-05.html"><small>Siguiente →</small>T5 · Series de Laurent, singularidades y transformada Z</a></nav>
-<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
 </main>
 </div>
 <script src="app.js"></script>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T3 Integración compleja: Cauchy y residuos · Matemáticas III · Guía para aprobar</title>
-<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 3, Integración compleja: Cauchy y residuos">
+<meta name="description" content="Matemáticas III (GIEyA): tema 3, Integración compleja: Cauchy y residuos">
 <meta name="theme-color" content="#1b6e8c">
 <link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
 <p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>¿Cuánto vale \(\oint_{|z|=1}\frac{dz}{z}\) y por qué es la integral clave de todo el tema?</summary><div class="inner"><p>Vale \(2\pi i\). Es el único término del desarrollo de Laurent que sobrevive al integrar, y por eso el teorema del residuo sólo necesita el coeficiente \(a_{-1}\).</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Qué dice la fórmula integral de Cauchy para derivadas?</summary><div class="inner"><p>\(f^{(n)}(a)=\frac{n!}{2\pi i}\oint_\gamma\frac{f(z)}{(z-a)^{n+1}}dz\): una función holomorfa tiene derivadas de todos los órdenes y quedan determinadas por los valores en el borde.</p></div></details><details class="paso"><summary><span class="pn">3</span>¿Cómo se calcula el residuo en un polo de orden 2?</summary><div class="inner"><p>\(\operatorname{Res}(f,z_0)=\lim_{z\to z_0}\frac{d}{dz}\left[(z-z_0)^2f(z)\right]\): se multiplica por el factor, se deriva una vez y se toma el límite.</p></div></details><details class="paso"><summary><span class="pn">4</span>(Control 2, problema 3) ¿Qué permite calcular el teorema del valor medio de Gauss?</summary><div class="inner"><p>Que \(f(a)=\frac1{2\pi}\int_0^{2\pi}f(a+re^{it})dt\). Por ejemplo, \(\int_0^{2\pi}\operatorname{sen}^6\left(\frac\pi4+e^{it}\right)dt=2\pi\operatorname{sen}^6\left(\frac\pi4\right)=2\pi\cdot\frac18=\frac\pi4\).</p></div></details><details class="paso"><summary><span class="pn">5</span>¿Qué cambio se hace para \(\int_0^{2\pi}R(\cos t,\operatorname{sen}t)dt\)?</summary><div class="inner"><p>\(z=e^{it}\) ⇒ \(\cos t=\frac{z+1/z}{2}\), \(\operatorname{sen}t=\frac{z-1/z}{2i}\), \(dt=\frac{dz}{iz}\): queda una integral racional sobre \(|z|=1\) que se resuelve por residuos.</p></div></details>
 </section>
 <nav class="pager" aria-label="Páginas"><a href="tema-02.html"><small>← Anterior</small>T2 · Funciones de variable compleja y holomorfía</a><a class="nx" href="tema-04.html"><small>Siguiente →</small>T4 · Transformadas de Laplace y de Fourier</a></nav>
-<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
 </main>
 </div>
 <script src="app.js"></script>

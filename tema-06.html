@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T6 Ecuaciones en derivadas parciales y diferencias finitas · Matemáticas III · Guía para aprobar</title>
-<meta name="description" content="Matemáticas III (UPCT, GIEyA): tema 6, Ecuaciones en derivadas parciales y diferencias finitas">
+<meta name="description" content="Matemáticas III (GIEyA): tema 6, Ecuaciones en derivadas parciales y diferencias finitas">
 <meta name="theme-color" content="#1b6e8c">
 <link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
 <p class="muted">Responde antes de desplegar.</p><details class="paso"><summary><span class="pn">1</span>Clasifica \(u_{xx}-4u_{xt}+u_{tt}=0\).</summary><div class="inner"><p>\(a=1\), \(b=-4\), \(c=1\) ⇒ \(b^2-4ac=16-4=12>0\) ⇒ <b>hiperbólica</b> (tipo onda).</p></div></details><details class="paso"><summary><span class="pn">2</span>¿Qué condición de estabilidad tiene el esquema explícito del calor?</summary><div class="inner"><p>\(\lambda=\frac{\alpha k}{h^2}\le\frac12\). Si se incumple, la solución numérica oscila y diverge aunque el problema continuo sea estable.</p></div></details><details class="paso"><summary><span class="pn">3</span>¿Qué es la condición CFL en la ecuación de ondas?</summary><div class="inner"><p>\(r=\frac{ck}{h}\le1\): en un paso de tiempo la onda no puede recorrer más de una celda de la malla, porque si no el esquema no «ve» la información que necesita.</p></div></details><details class="paso"><summary><span class="pn">4</span>¿Qué ventaja tiene un esquema implícito?</summary><div class="inner"><p>Es incondicionalmente estable (no hay límite para k), a costa de resolver un sistema lineal tridiagonal en cada paso. Crank-Nicolson además es de orden 2 en el tiempo.</p></div></details><details class="paso"><summary><span class="pn">5</span>En la ecuación de Laplace discretizada, ¿qué significa la fórmula de los cinco puntos?</summary><div class="inner"><p>Que en el estado estacionario cada nodo interior es la MEDIA de sus cuatro vecinos: \(u_{i,j}=\frac14(u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1})\); de ahí los métodos iterativos tipo Jacobi o Gauss-Seidel.</p></div></details>
 </section>
 <nav class="pager" aria-label="Páginas"><a href="tema-05.html"><small>← Anterior</small>T5 · Series de Laurent, singularidades y transformada Z</a><a class="nx" href="cuestiones.html"><small>Siguiente →</small>Cuestiones de teoría</a></nav>
-<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (UPCT, GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
+<p class="inicio" style="margin:36px 0 8px;text-align:center;font-size:13px;color:var(--muted)">Guía no oficial de Matemáticas III (GIEyA) · Datos tomados del curso <time datetime="2022-09">2022/23</time> (guiones de teoría, prácticas y controles de 2021) · página creada en noviembre de 2026</p>
 </main>
 </div>
 <script src="app.js"></script>
