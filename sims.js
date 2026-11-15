@@ -443,5 +443,56 @@ SIMS.planoz=el=>build(el,{w:640,h:340,
   La envolvente es r<sup>n</sup> (${r<1?'decae':'crece'} un ${F(Math.abs(1-r)*100)} % por muestra) y h[n] oscila con periodo ≈ ${a.st.th<1?'∞':F(360/a.st.th)} muestras.<br>
   <span class="hint">H(z) = z² / (z² − 2r cosθ·z + r²). Con θ = 0 (polo real) no hay oscilación; con θ = 180° la señal cambia de signo en cada muestra.</span>`);}});
 
+/* ---- Integral real con residuos, paso a paso: I = ∫ dx/(x²+1)² = π/2 ---- */
+SIMS.residuoPaso=el=>build(el,{w:660,h:400,
+ sliders:[{k:'paso',v:0,min:0,max:6,step:1,l:'paso de la resolución (0 = problema)',u:''}],
+ draw(a){a.clear();const p=a.st.paso;
+  const OX=180,OY=200,S=60,R=2.5;
+  const X=x=>OX+x*S, Y=y=>OY-y*S;
+  // ejes
+  a.line(X(-R-0.4),Y(0),X(R+0.4),Y(0),C.muted,1);
+  a.line(X(0),Y(-R-0.4),X(0),Y(R+0.4),C.muted,1);
+  a.txt('Re',X(R+0.4)+2,Y(0)+14,C.muted,11,'left');
+  a.txt('Im',X(0)+6,Y(R+0.4)-2,C.muted,11,'left');
+  // contorno: segmento real + semicircunferencia, sentido antihorario
+  if(p>=1){
+    a.line(X(-R),Y(0),X(R),Y(0),C.f,2.2);
+    a.g.strokeStyle=C.f;a.g.lineWidth=2.2;a.g.beginPath();
+    for(let t=0;t<=Math.PI+0.0001;t+=0.03){const x=X(R*Math.cos(t)),y=Y(R*Math.sin(t));t===0?a.g.moveTo(x,y):a.g.lineTo(x,y);}
+    a.g.stroke();
+    a.arrow(X(0.4),Y(0),X(1.2),Y(0),C.f,2.2);
+    a.arrow(X(R*Math.cos(1.45)),Y(R*Math.sin(1.45)),X(R*Math.cos(1.7)),Y(R*Math.sin(1.7)),C.f,2.2);
+    a.txt('R → ∞',X(R*0.75),Y(R*0.75)-6,C.f,11,'left');
+  }
+  // polos: z = i dentro del contorno, z = −i fuera
+  a.circ(X(0),Y(1),5,C.d,true);
+  a.txt('i',X(0)+10,Y(1)-6,C.d,13,'left');
+  a.circ(X(0),Y(-1),5,C.muted,true);
+  a.txt('−i',X(0)+10,Y(-1)+14,C.muted,13,'left');
+  if(p>=2){a.txt('polo doble dentro',X(0)+12,Y(1)-22,C.d,11,'left');}
+  if(p>=1){a.txt('fuera',X(0)+10,Y(-1)+28,C.muted,11,'left');}
+  // ecuaciones a la derecha
+  const L=[[0,46,'I = ∫ dx/(x²+1)²  (de −∞ a ∞)',C.text],
+    [2,92,'(x²+1)² = (z−i)²(z+i)²',C.text],
+    [2,114,'f(z) = 1/[(z−i)²(z+i)²]',C.text],
+    [3,160,'Res(f, i) = d/dz [ 1/(z+i)² ]',C.d],
+    [4,184,'= −2/(z+i)³ en z = i',C.c],
+    [4,206,'= −2/(2i)³ = −2/(−8i) = −i/4',C.c],
+    [5,252,'∮ f dz = 2πi · (−i/4) = π/2',C.a],
+    [6,298,'I = π/2  ✓',C.a]];
+  a.txt('Teorema de los residuos',350,26,C.text,13,'left');
+  L.forEach(([k,y,s,c])=>{if(p>=k)a.txt(s,350,y,c,12,'left');});
+  const T=[
+   'Queremos I = ∫ de −∞ a ∞ de dx/(x²+1)². Es una integral real, pero se resuelve con variable compleja: se cierra el camino con una semicircunferencia y se aplica el teorema de los residuos.',
+   'Se cierra el segmento real con una semicircunferencia de radio R en el semiplano superior, recorrida en sentido antihorario. El integrando decae como 1/z⁴, así que la integral sobre la semicircunferencia tiende a 0 cuando R → ∞. La integral real es entonces la del contorno completo.',
+   'Dentro del contorno hay un único polo: z = i. El polo z = −i queda fuera. Como el factor (z−i) aparece al cuadrado, es un polo doble, y la fórmula del residuo de polo simple no sirve.',
+   'Para un polo doble: Res = d/dz [(z−i)² f(z)] evaluado en z = i. Aquí (z−i)² f(z) = 1/(z+i)².',
+   'Derivando: d/dz (z+i)⁻² = −2(z+i)⁻³. En z = i, (2i)³ = −8i, así que −2/(−8i) = 1/(4i) = −i/4.',
+   'Teorema de los residuos: ∮ f dz = 2πi · Res = 2πi · (−i/4) = π/2. Como i · (−i) = 1, el resultado es real, como debe ser.',
+   'Como la semicircunferencia no aporta, I = π/2. Comprobación: con x = tan θ la integral se convierte en ∫ cos²θ dθ sobre (−π/2, π/2), que vale π/2.'
+  ];
+  a.html(`<div>${T[p]}</div>`);
+ }});
+
 document.querySelectorAll('[data-sim]').forEach(el=>{const f=SIMS[el.dataset.sim];if(f)f(el);});
 })();
