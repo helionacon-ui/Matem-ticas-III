@@ -17,24 +17,64 @@
 <style id="lectura">
 @media screen{
 :root{--body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif}
-body{font-family:var(--body);font-size:20.5px;line-height:2.1;letter-spacing:.022em;word-spacing:.09em}
-p{margin:0 0 1.75em}
-li{margin:.8em 0}
-p,li{max-width:62ch}
+body{font-family:var(--body);font-size:20px;line-height:1.95;letter-spacing:.014em;word-spacing:.05em}
+p{margin:0 0 1.5em;max-width:64ch;hyphens:auto;-webkit-hyphens:auto}
+li{margin:.72em 0;max-width:64ch}
 .box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
-h2{margin-top:92px;margin-bottom:24px;line-height:1.3}
-h3{font-size:24px;margin:58px 0 18px;line-height:1.35}
-h4{margin-top:34px;margin-bottom:10px}
-.box{padding:24px 30px;margin:32px 0}
-table{font-size:18px;line-height:1.75}
-td,th{padding-top:.85em;padding-bottom:.85em}
-figure.fig figcaption{font-size:17px;line-height:1.8;margin-top:12px}
+h2{margin-top:92px;margin-bottom:22px;line-height:1.25}
+h3{font-size:25px;margin:66px 0 20px;line-height:1.3}
+h4{margin:38px 0 12px;line-height:1.4}
+/* ---- entradilla con capitular ---- */
+.zero .lede{font-size:1.05em;line-height:1.86;text-align:left}
+.zero .lede::first-letter{float:left;font-size:3.05em;line-height:.84;font-weight:700;padding:.06em .14em 0 0;color:var(--tc,var(--accent))}
+/* ---- sumario del tema ---- */
+p.obj{max-width:none;text-align:left;margin:0 0 1.7em;padding:14px 20px;border-radius:10px;
+ background:color-mix(in srgb,var(--surface) 62%,transparent);
+ border-left:3px solid var(--tc,var(--accent));font-size:.95em;line-height:1.75}
+p.obj>b:first-child{display:block;font:700 11.5px/1.7 var(--mono,monospace);letter-spacing:.1em;
+ text-transform:uppercase;color:var(--tc,var(--accent))}
+/* ---- términos con entrada, al modo de un manual ---- */
+p.run{margin:0 0 1.38em}
+p.run>b:first-child{display:block;font:700 12px/1.7 var(--mono,monospace);letter-spacing:.09em;
+ text-transform:uppercase;color:var(--tc,var(--accent))}
+/* ---- rótulos internos ---- */
+.zero>.ft{font:700 11.5px/1.6 var(--mono,monospace);letter-spacing:.1em;text-transform:uppercase}
+.zero>.ft:not(:first-child){margin-top:2em;font-size:12.5px;color:var(--fg);opacity:.72}
+/* ---- desarrollo teórico ---- */
+.deep h4{position:relative;padding-left:2.35em;font-size:1.03em}
+.deep h4 .hn{position:absolute;left:0;top:.06em;font:700 .84em/1.7 var(--mono,monospace);
+ color:var(--tc,var(--accent));opacity:.8}
+.deep>h4:not(:first-child){border-top:1px solid var(--line);padding-top:30px;margin-top:42px}
+.eqd{margin:1.65em 0;text-align:center;overflow-x:auto;overflow-y:hidden}
+/* ---- notas al margen, sin duplicar el rótulo ---- */
+.box.deepnote{padding:15px 20px;margin:1.5em 0;border-radius:0 10px 10px 0;
+ background:color-mix(in srgb,var(--surface) 76%,transparent)}
+.box.key.deepnote::before,.box.trap.deepnote::before{content:none}
+.box.deepnote>b:first-child{display:block;font:700 11.5px/1.7 var(--mono,monospace);
+ letter-spacing:.1em;text-transform:uppercase;color:var(--tc,var(--accent))}
+.box.trap.deepnote>b:first-child{color:var(--warn)}
+/* ---- resto ---- */
+.box{padding:22px 28px;margin:30px 0}
+table{font-size:18px;line-height:1.7}
+td,th{padding-top:.8em;padding-bottom:.8em}
+figure.fig figcaption{font-size:17px;line-height:1.78;margin-top:12px}
 figure.fig{margin-block:34px}
-.lede{line-height:1.85}
 .toc a{font-size:15.5px;padding:8px 0 8px 10px}
 svg,svg text,canvas,.katex,mjx-container{letter-spacing:normal;word-spacing:normal}
+mjx-container[display]{margin:0!important}
 details>summary{line-height:1.7;padding-block:.5em}
-@media (max-width:600px){body{font-size:19px;line-height:2}}
+.enun p,.inner p{text-align:left}
+@media (min-width:1040px){
+p,li{text-align:justify}
+.zero .lede,.enun p,.inner p,figcaption,.ft{text-align:left}
+}
+@media (max-width:600px){
+body{font-size:18.5px;line-height:1.9}
+p{text-align:left}
+.zero .lede::first-letter{font-size:2.6em}
+.deep h4{padding-left:0}
+.deep h4 .hn{position:static;margin-right:.5em}
+}
 }
 </style>
 </head>
@@ -46,37 +86,37 @@ details>summary{line-height:1.7;padding-block:.5em}
 <main>
 <section class="sec tema" style="--tc:var(--c4);--tcs:var(--c4s)">
 <div class="sh"><span aria-hidden="true" class="badge">3</span><div class="shx"><p class="kick">Variable compleja (control 2 · 50 %) · Tema 3</p><h2 id="t3">Integración compleja: Cauchy y residuos</h2><div class="tags"><span class="tag">Variable compleja (control 2 · 50 %)</span><span class="tag">Control 2 · variable compleja</span></div></div></div>
-<div class="zero"><p class="ft">Desde cero</p><p><b>Objetivo:</b> Calcular integrales sobre curvas, aplicar el teorema y las fórmulas integrales de Cauchy, el teorema del residuo, y usarlo para integrales reales.</p><p><b>Integral de línea compleja</b>: con \(\gamma(t)\), \(t\in[a,b]\),</p>
-<p>\(\displaystyle\int_\gamma f(z)\,dz=\int_a^bf(\gamma(t))\gamma'(t)\,dt\).</p>
+<div class="zero"><p class="ft">Desde cero</p><p class="obj"><b>Objetivo:</b> Calcular integrales sobre curvas, aplicar el teorema y las fórmulas integrales de Cauchy, el teorema del residuo, y usarlo para integrales reales.</p><p class="run"><b>Integral de línea compleja:</b> con \(\gamma(t)\), \(t\in[a,b]\),</p>
+<p class="lede">\(\displaystyle\int_\gamma f(z)\,dz=\int_a^bf(\gamma(t))\gamma'(t)\,dt\).</p>
 <p>Caso fundamental: sobre la circunferencia \(|z-a|=r\) recorrida positivamente,</p>
 <p>\(\displaystyle\oint\frac{dz}{(z-a)^n}=\begin{cases}2\pi i&n=1\\0&n\neq1\end{cases}\)</p>
-<p><b>Teorema de Cauchy-Goursat</b>: si f es holomorfa en un dominio <b>simplemente conexo</b> y γ es una curva cerrada contenida en él, \(\oint_\gamma f=0\). Consecuencia: la integral sólo depende de los extremos y se pueden deformar los contornos.</p>
-<p><b>Fórmulas integrales de Cauchy</b>: si f es holomorfa dentro y sobre γ (cerrada, simple, positiva) y \(a\in\operatorname{int}\gamma\):</p>
+<p class="run"><b>Teorema de Cauchy-Goursat:</b> si f es holomorfa en un dominio <b>simplemente conexo</b> y γ es una curva cerrada contenida en él, \(\oint_\gamma f=0\). Consecuencia: la integral sólo depende de los extremos y se pueden deformar los contornos.</p>
+<p class="run"><b>Fórmulas integrales de Cauchy:</b> si f es holomorfa dentro y sobre γ (cerrada, simple, positiva) y \(a\in\operatorname{int}\gamma\):</p>
 <p>\(f(a)=\dfrac{1}{2\pi i}\oint_\gamma\dfrac{f(z)}{z-a}dz\) y \(f^{(n)}(a)=\dfrac{n!}{2\pi i}\oint_\gamma\dfrac{f(z)}{(z-a)^{n+1}}dz\).</p>
 <p>Es decir, <b>los valores en el interior quedan determinados por los del borde</b>. De aquí salen el <b>teorema del valor medio de Gauss</b> \(f(a)=\frac1{2\pi}\int_0^{2\pi}f(a+re^{it})dt\) (problema 3 del control 2), el principio del módulo máximo, el teorema de Liouville y el teorema fundamental del álgebra.</p>
-<p><b>Teorema de los residuos</b>: si f es holomorfa en γ y su interior salvo en las singularidades aisladas \(z_1,\dots,z_k\),</p>
+<p class="run"><b>Teorema de los residuos:</b> si f es holomorfa en γ y su interior salvo en las singularidades aisladas \(z_1,\dots,z_k\),</p>
 <p>\(\displaystyle\oint_\gamma f(z)\,dz=2\pi i\sum_{j}\operatorname{Res}(f,z_j)\).</p>
-<p><b>Cálculo de residuos</b>:</p>
+<p class="run"><b>Cálculo de residuos:</b> </p>
 <ul><li>Polo simple: \(\operatorname{Res}=\lim_{z\to z_0}(z-z_0)f(z)\); si \(f=P/Q\) con Q(z₀) = 0 simple, \(\operatorname{Res}=\dfrac{P(z_0)}{Q'(z_0)}\).</li>
 <li>Polo de orden m: \(\operatorname{Res}=\dfrac{1}{(m-1)!}\lim_{z\to z_0}\dfrac{d^{m-1}}{dz^{m-1}}\left[(z-z_0)^mf(z)\right]\).</li>
 <li>Esencial: el coeficiente \(a_{-1}\) del desarrollo de Laurent (tema 5).</li></ul>
-<p><b>Aplicación a integrales reales</b> (lo que más cae):</p>
+<p class="run"><b>Aplicación a integrales reales:</b> (lo que más cae):</p>
 <ul><li>\(\int_0^{2\pi}R(\cos t,\operatorname{sen}t)dt\): se pone \(z=e^{it}\), \(\cos t=\frac{z+z^{-1}}2\), \(\operatorname{sen}t=\frac{z-z^{-1}}{2i}\), \(dt=\frac{dz}{iz}\) y queda una integral sobre \(|z|=1\).</li>
 <li>\(\int_{-\infty}^{\infty}\frac{P}{Q}dx\) con \(\deg Q\ge\deg P+2\): se cierra con una semicircunferencia superior y, por el <b>lema de Jordan</b>, su aportación tiende a 0 ⇒ la integral vale \(2\pi i\sum\) residuos del <b>semiplano superior</b>.</li>
 <li>Con \(e^{iax}\) (a &gt; 0) basta \(\deg Q\ge\deg P+1\); después se toman partes real e imaginaria para obtener las integrales con \(\cos ax\) y \(\operatorname{sen}ax\).</li></ul></div>
 <!--ill--><div class="ill-wrap"><h3 class="ill-h" style="margin:22px 0 4px">En imágenes</h3><figure class="ill"><div class="ill-t">Una integral de camino se reduce a sumar residuos</div><svg viewBox="0 0 560 262" role="img" aria-label="Teorema de los residuos" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,Segoe UI,sans-serif"><polygon points="226,126 228.8,120.2 230.9,114.5 232.2,109 232.6,103.6 231.9,98.5 230.2,93.8 227.4,89.4 223.6,85.3 218.7,81.7 213.1,78.5 206.8,75.7 199.9,73.3 192.7,71.3 185.4,69.7 178,68.3 170.8,67.3 163.8,66.4 157.1,65.8 150.6,65.4 144.5,65.1 138.6,64.9 132.9,64.8 127.1,64.8 121.4,64.9 115.5,65.1 109.4,65.4 102.9,65.8 96.2,66.4 89.2,67.3 82,68.3 74.6,69.7 67.3,71.3 60.1,73.3 53.2,75.7 46.9,78.5 41.3,81.7 36.4,85.3 32.6,89.4 29.8,93.8 28.1,98.5 27.4,103.6 27.8,109 29.1,114.5 31.2,120.2 34,126 37.2,131.8 40.7,137.5 44.4,143 48,148.4 51.5,153.5 54.8,158.2 57.9,162.6 60.7,166.7 63.4,170.3 66,173.5 68.6,176.3 71.4,178.7 74.5,180.7 78,182.3 82,183.7 86.6,184.7 91.8,185.6 97.7,186.2 104.2,186.6 111.2,186.9 118.5,187.1 126.1,187.2 133.9,187.2 141.5,187.1 148.8,186.9 155.8,186.6 162.3,186.2 168.2,185.6 173.4,184.7 178,183.7 182,182.3 185.5,180.7 188.6,178.7 191.4,176.3 194,173.5 196.6,170.3 199.3,166.7 202.1,162.6 205.2,158.2 208.5,153.5 212,148.4 215.6,143 219.3,137.5 222.8,131.8 226,126" fill="var(--tc,var(--accent))" stroke="var(--tc,var(--accent))" stroke-width="2.8" opacity="0.07" stroke-linejoin="round" stroke-linecap="round"/><line x1="226" y1="122" x2="226" y2="120.1" stroke="var(--tc,var(--accent))" stroke-width="2.6" opacity="1" stroke-linecap="round"/><polygon points="226,112 229.7,120.2 222.3,120.2" fill="var(--tc,var(--accent))"/><circle cx="90" cy="110" r="4.5" fill="var(--warn,#b8730c)" stroke="none" stroke-width="1.8" opacity="1"/><text x="98" y="104" fill="var(--warn,#b8730c)" font-size="12.5" text-anchor="start" font-weight="700" opacity="1">z₁</text><circle cx="148" cy="148" r="4.5" fill="var(--warn,#b8730c)" stroke="none" stroke-width="1.8" opacity="1"/><text x="156" y="142" fill="var(--warn,#b8730c)" font-size="12.5" text-anchor="start" font-weight="700" opacity="1">z₂</text><circle cx="174" cy="96" r="4.5" fill="var(--warn,#b8730c)" stroke="none" stroke-width="1.8" opacity="1"/><text x="182" y="90" fill="var(--warn,#b8730c)" font-size="12.5" text-anchor="start" font-weight="700" opacity="1">z₃</text><circle cx="242" cy="186" r="4.5" fill="var(--muted)" stroke="none" stroke-width="1.8" opacity="1"/><text x="242" y="204" fill="var(--muted)" font-size="11" text-anchor="middle" font-weight="700" opacity="1">fuera: no cuenta</text><text x="60" y="64" fill="var(--tc,var(--accent))" font-size="14" text-anchor="middle" font-weight="700" opacity="1">C</text><text x="290" y="48" fill="var(--tc,var(--accent))" font-size="13.5" text-anchor="start" font-weight="700" opacity="1">∮_C f(z) dz = 2πi·ΣRes</text><text x="290" y="81" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">Solo cuentan los polos</text><text x="290" y="103" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">encerrados por C</text><text x="290" y="125" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">(sentido antihorario).</text><text x="290" y="158" fill="var(--warn,#b8730c)" font-size="14" text-anchor="start" font-weight="700" opacity="1">Res(z₀) = coeficiente</text><text x="290" y="180" fill="var(--warn,#b8730c)" font-size="14" text-anchor="start" font-weight="700" opacity="1">de (z−z₀)⁻¹ en Laurent.</text></svg><figcaption>En lugar de parametrizar el contorno, basta localizar las singularidades interiores y calcular el residuo de cada una.</figcaption></figure><figure class="ill"><div class="ill-t">Cerrar el camino por arriba para calcular una integral impropia</div><svg viewBox="0 0 560 262" role="img" aria-label="Integral real con semicircunferencia" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,Segoe UI,sans-serif"><line x1="6" y1="170" x2="246.8" y2="170" stroke="var(--muted)" stroke-width="1.5" opacity="1" stroke-linecap="round"/><polygon points="254,170 246.7,173.3 246.7,166.7" fill="var(--muted)"/><line x1="130" y1="190" x2="130" y2="57.2" stroke="var(--muted)" stroke-width="1.5" opacity="1" stroke-linecap="round"/><polygon points="130,50 133.3,57.3 126.7,57.3" fill="var(--muted)"/><path d="M222,170 A92,92 0 0 0 38,170" fill="none" stroke="var(--c6,#2c8a52)" stroke-width="3" opacity="1" stroke-linejoin="round" stroke-linecap="round"/><line x1="38" y1="170" x2="222" y2="170" stroke="var(--tc,var(--accent))" stroke-width="3.4" opacity="1" stroke-linecap="round"/><circle cx="130" cy="124" r="4.5" fill="var(--warn,#b8730c)" stroke="none" stroke-width="1.8" opacity="1"/><text x="138" y="126" fill="var(--warn,#b8730c)" font-size="13" text-anchor="start" font-weight="700" opacity="1">i</text><circle cx="130" cy="216" r="4.5" fill="var(--muted)" stroke="none" stroke-width="1.8" opacity="1"/><text x="138" y="222" fill="var(--muted)" font-size="12" text-anchor="start" font-weight="700" opacity="1">−i</text><text x="230" y="186" fill="var(--muted)" font-size="12" text-anchor="middle" font-weight="700" opacity="1">R</text><text x="38" y="186" fill="var(--muted)" font-size="12" text-anchor="middle" font-weight="700" opacity="1">−R</text><text x="70" y="88" fill="var(--c6,#2c8a52)" font-size="13" text-anchor="middle" font-weight="700" opacity="1">Γ_R</text><text x="290" y="56" fill="var(--fg)" font-size="14" text-anchor="start" font-weight="600" opacity="1">∫_{−∞}^{∞} dx/(1+x²)</text><text x="290" y="89" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">Se cierra el eje real con</text><text x="290" y="111" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">un arco Γ_R; al hacer</text><text x="290" y="133" fill="var(--fg)" font-size="14" text-anchor="start" opacity="1">R → ∞ el arco aporta 0.</text><text x="290" y="166" fill="var(--warn,#b8730c)" font-size="14" text-anchor="start" font-weight="700" opacity="1">Resultado: 2πi·Res(i)</text><text x="290" y="188" fill="var(--warn,#b8730c)" font-size="14" text-anchor="start" font-weight="700" opacity="1">= π.</text></svg><figcaption>Solo el polo del semiplano superior está dentro del contorno; el residuo en i, multiplicado por 2πi, da el valor de la integral real.</figcaption></figure></div><!--/ill--><details class="nom"><summary><span aria-hidden="true" class="nom-ic">Aa</span>Nomenclatura del tema 3 <span class="src">7 símbolos</span></summary><div class="inner">
 <div class="tw"><table><tr><th>Símbolo</th><th>Qué significa</th><th>Unidades · ejemplo</th></tr><tr><td class="sym">∫_γ f dz</td><td>∫ f(γ(t))γ′(t) dt</td><td class="u"></td></tr><tr><td class="sym">Cauchy-Goursat</td><td>∮ f = 0 si f es holomorfa dentro</td><td class="u"></td></tr><tr><td class="sym">f(a)</td><td>(1/2πi)∮ f/(z−a) dz</td><td class="u"></td></tr><tr><td class="sym">f⁽ⁿ⁾(a)</td><td>(n!/2πi)∮ f/(z−a)ⁿ⁺¹ dz</td><td class="u"></td></tr><tr><td class="sym">Res</td><td>Coeficiente a₋₁ de Laurent</td><td class="u"></td></tr><tr><td class="sym">∮ f = 2πi ΣRes</td><td>Teorema de los residuos</td><td class="u"></td></tr><tr><td class="sym">lema de Jordan</td><td>El arco tiende a 0</td><td class="u"></td></tr></table></div></div></details>
 <figure class="fig"><p class="ft">Figura interactiva - contorno, polos y teorema de los residuos</p><div data-sim="residuos"></div><figcaption>Mueve los controles y lee el recuadro: la figura calcula lo mismo que tú harías a mano en el examen.</figcaption></figure>
-<!--amp1--><div class="zero" style="margin-top:14px"><p class="ft">Explicación ampliada</p><p class="ft">La integral compleja y el teorema de Cauchy</p><p>\(\oint_\gamma f\,dz\) suma \(f\) a lo largo de un camino cerrado del plano complejo. El teorema de <b>Cauchy–Goursat</b> dice algo sorprendente: si \(f\) es holomorfa en <b>todo el interior</b> de \(\gamma\), la integral vale <b>cero</b>. Lo interesante ocurre cuando hay puntos «malos» dentro (singularidades), por ejemplo \(\oint_{|z-a|=r}\dfrac{dz}{z-a}=2\pi i\).</p>
+<!--amp1--><div class="zero" style="margin-top:14px"><p class="ft">Explicación ampliada</p><p class="ft">La integral compleja y el teorema de Cauchy</p><p class="lede">\(\oint_\gamma f\,dz\) suma \(f\) a lo largo de un camino cerrado del plano complejo. El teorema de <b>Cauchy–Goursat</b> dice algo sorprendente: si \(f\) es holomorfa en <b>todo el interior</b> de \(\gamma\), la integral vale <b>cero</b>. Lo interesante ocurre cuando hay puntos «malos» dentro (singularidades), por ejemplo \(\oint_{|z-a|=r}\dfrac{dz}{z-a}=2\pi i\).</p>
 <p>Esto lleva a la <b>fórmula integral de Cauchy</b> \(f(a)=\dfrac1{2\pi i}\oint\dfrac{f(z)}{z-a}dz\): conocer \(f\) en el contorno determina \(f\) dentro.</p><p class="ft">Teorema de los residuos: cómo se usa</p><p>Si \(f\) es holomorfa salvo en un número finito de singularidades aisladas dentro de \(\gamma\), entonces \(\oint_\gamma f\,dz=2\pi i\sum\operatorname{Res}(f,z_k)\). El residuo es el coeficiente \(a_{-1}\) del desarrollo de Laurent. En un <b>polo simple</b>, \(\operatorname{Res}=\lim(z-z_0)f\) (o \(P(z_0)/Q'(z_0)\) si \(f=P/Q\)); en uno de orden \(m\), se deriva \(m-1\) veces.</p>
 <p>Aplicaciones a integrales reales: <b>impropias</b> \(\int_{-\infty}^\infty R(x)dx=2\pi i\sum\operatorname{Res}\) (semiplano superior) si \(R\) decae como \(1/x^2\); y <b>trigonométricas</b> \(\int_0^{2\pi}\) con \(z=e^{it}\), \(\cos t=\tfrac12(z+1/z)\), \(dt=dz/(iz)\), sobre la circunferencia unidad.</p></div><!--/amp1--><!--deep--><h3 id="t3-profundiza">Desarrollo teórico a fondo</h3><div class="deep">
-<h4>1. Integral de línea compleja</h4>
+<h4><span class="hn">1</span>Integral de línea compleja</h4>
 <div class="box key deepnote"><b>Idea clave.</b> la integral de una función compleja a lo largo de una curva \(\gamma\) se parametriza y se resuelve como una integral real.</div>
 <div class="eqd">\[\int_\gamma f(z)\,\mathrm dz=\int_a^b f(\gamma(t))\,\gamma^{\prime}(t)\,\mathrm dt\]</div>
 <div class="box trap deepnote"><b>Cuidado.</b> Si la función es holomorfa en un dominio simplemente conexo, la integral sobre una curva cerrada es cero. Esto es el teorema de Cauchy.</div>
 <details class="dem"><summary><span class="pn">∴</span>Teorema y fórmula integral de Cauchy</summary><div class="inner"><div class="eqd">\[\oint_\gamma\frac{f(z)}{z-z_0}\,\mathrm dz=2\pi j\,f(z_0)\]</div>
 <p>Permite calcular integrales de funciones racionales si el punto \(z_0\) está dentro de la curva. Es una herramienta muy potente.</p></div></details>
-<h4>2. Residuos</h4>
+<h4><span class="hn">2</span>Residuos</h4>
 <div class="box key deepnote"><b>Idea clave.</b> el residuo de una función en un punto singular aislado es el coeficiente \(a_{-1}\) de su desarrollo de Laurent. Con él, cualquier integral cerrada se calcula sumando residuos.</div>
 <div class="eqd">\[\oint_\gamma f(z)\,\mathrm dz=2\pi j\sum\mathrm{Res}(f,z_k)\]</div>
 <ul><li>Polo simple en \(z_0\): \(\mathrm{Res}=\lim_{z\to z_0}(z-z_0)f(z)\).</li><li>Polo de orden \(m\): usa la derivada \((m-1)\)-ésima de \((z-z_0)^m f(z)\), dividida entre \((m-1)!\).</li></ul>
